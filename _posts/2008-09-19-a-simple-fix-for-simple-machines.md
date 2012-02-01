@@ -19,21 +19,21 @@ meta:
 Yesterday morning I recieved an email from Dr. Jeffrey Wood, Professor of Physics at San Juan College in New Mexico. Here is part of his email:
 
 > Hi,
->
+> 
 > I’m not  sure if you’re the right person to take this message, but I figure that you can forward it to the right person if not!
->
+> 
 > I am originally from Columbus, OH and used to go to the downtown location of COSI in the 1970s as a kid for entertainment and loved it. I can still see many of the displays and the awesome vending machine cafeteria in my  mind. I’ve also been to the new location on a couple of occasions as an adult with my own kids and believe that Columbus really has a great asset in COSI! I think that it probably played a part in my early development that helped me to decide to eventually become a physicist.
->
+> 
 > I occasionally send my intro physics students to the COSI website to learn about Simple Machines ([http://www.cosi.org/files/Flash/simpMach/sm1.html](http://www.cosi.org/files/Flash/simpMach/sm1.html)).
->
+> 
 > The website is very engaging and well designed, but I have noticed a couple of issues that have confused students and I thought that COSI should know and I hope that they can make some updates.
->
+> 
 > *(Makes some recommendations for updates and corrections)*
->
+> 
 > Thanks for the great job that you’re doing in opening the minds and hearts of our countries future scientists, engineers, and technology leaders. We need their imagination and skills now more than ever to move America and the world community forward to better days for us all.
->
+> 
 > Please feel free to contact me if you need clarification on any of the above.
->
+> 
 > Sincerely,
 > Dr. Jeffrey Wood, PhD
 > Professor of Physics
