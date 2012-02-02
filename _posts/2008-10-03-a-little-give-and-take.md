@@ -1,12 +1,12 @@
---- 
+---
 layout: post
 title: A Little Give and Take...
-tags: 
+tags:
 - In the Works
 status: publish
 type: post
 published: true
-meta: 
+meta:
   _edit_last: "2"
   btc_comment_counts: a:0:{}
   btc_comment_summary: a:0:{}
