@@ -24,13 +24,13 @@ meta:
 ---
 After last week's [Museum 2.0 post about our social media experiments at COSI](http://museumtwo.blogspot.com/2009/02/change-from-inside-conversation-with.html), I've been continuing to think quite a bit about how museums engage in the various networks available for their use. What I've since pieced together is three areas of social media use for museums that each come with their own unique challenges for acceptance with the institution. Here is a little brain dump of my working model:
 
-## Category One: "Content Sharing"
+### Category One: "Content Sharing"
 
 Museums love to generate and share content. In fact, I can't think of a single museum that could survive without content. Museums even specialize in a specific kind of content. There are content creators already on staff (or at least working closely with the museum). Said creators usually have content spilling out of their ears, coming across more interesting content in their research than they can ever fit into the exhibition or experience that they are creating.
 
 For these reasons and more, museums seem to have a pretty easy time diving into content-sharing social media sites like [YouTube](http://www.youtube.com/cosiscience), [Flickr](http://www.flickr.com/groups/432979@N21/), or [Webshots](http://www.flickr.com/groups/432979@N21/). Here at COSI, it seems like every week I come across someone else in the building who has an interesting set of photos or videos that are just begging to be shared with the outside world. These sites seem to generally face little resistance internally since they are so closely aligned with the general purpose of museums, and all kinds of staff members can participate casually just by contributing content.
 
-## Category Two: "Internal Working Systems"
+### Category Two: "Internal Working Systems"
 
 Museums face the same working challenges regarding internal communication and collaboration as any other company. There's no perfect system for getting (and keeping) everyone on the same page, so each organization has to experiment with new technologies as they increasingly realize the age-old system of All-Team emails and shared network drives doesn't work any more for either the teams trying to use them or for the IS staff trying to maintain all of that server storage space.
 
@@ -38,7 +38,7 @@ When dealing with these internal struggles, it doesn't take too much to get the 
 
 I would even consider typical use of [Ning](http://www.ning.com/) networks to often fall into this category, as they seem to be generally used for very program-specific groups of people like COSI's [Camp-In Alumni](http://millioncampers.ning.com/) and [Miracle-Gro Capital Scholars](http://mgcapitalscholars.ning.com/) after-school program. Although not used only among *employees* of the institution, it is easier to "control" these networks as their pool of users is already limited and filtered by some other institutional criteria.
 
-## Category Three: "Pure Social Networks"
+### Category Three: "Pure Social Networks"
 
 Here's where many museums and institutions get a little squeamish. Social networks exist with the primary purpose of enabling people to connect with one another. Although one can join these networks and choose to just "push content" (photos, videos, event listings, general announcements) like they would on a content sharing site, the true value of these networks comes when the museum is willing to take their involvement a step further. Active participation and conversational interaction foster personal relationships that will benefit the organization in the long run. By giving individuals a real, personal connecting point with a previously "faceless" institution, those who interact with the museum on these networks feel more involved. They are privy to "insider" information, they can freely discuss topics of interest, and can even form friendships with individual museum representatives. The result is a greater sense of ownership in the institution as a whole.
 
@@ -46,7 +46,7 @@ As we at COSI have become more active on [Facebook](http://www.facebook.com/page
 
 These are the networks that raise most of the tough questions: What is the ROI? How much time will this take from our staff? Who is qualified to speak candidly on behalf of the organization? Do we filter who we are willing to connect with and how? What about liability issues? Are we willing to open up access to these networks from our local workstations? These questions don't have easy answers (and some no answer yet at all), but the benefits we've seen so far have been invaluable. You can't buy a legion of people who are deeply and personally invested in the continued success of your organization.
 
-## What Do You Think?
+### What Do You Think?
 
 In no way to I claim any of this to be a fully-baked idea, but rather something closer to a splatter of wet paint on an already cluttered wall. "Social media" has become a buzz-phrase that many discuss generally, but it's ultimate use and application is as varied as the institutions and individuals using these tools. I think for museums, we might have to start discussing them in categories like these as we wade deeper.
 
