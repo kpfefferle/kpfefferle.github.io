@@ -4,6 +4,8 @@ title: "Lessons in Touch App Design From a 3 Year Old"
 category: 
 tags: []
 ---
+*Originally posted on the [dynamIt Blog](http://www.dynamit.us/blog/2010/06/lessons-in-touch-app-design-from-a-3-year-old/).*
+
 Whenever we create a web application for a client, we spend a significant amount of time and effort thinking through how the application should behave for its users. It is a priority for us that each element of interaction in an application help the user accomplish their intended goal quickly and efficiently and with a minimum of confusion.
 
 Just last week, Bill and I had a lengthy discussion about a checkbox labeled “copy information from above.” What information should be copied? Should the checkbox be disabled or disappear once it is checked, or remain active to allow the option of unchecking it? If it is then unchecked, should it clear all fields in the entry, or only the unmodified ones? The answers to these questions that we choose to implement will have a significant impact to the usability of the application for its users.

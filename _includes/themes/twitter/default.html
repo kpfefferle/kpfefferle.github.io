@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ page.title }}</title>
+    <title>{{ page.title }} | Kevin Pfefferle</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <meta name="author" content="{{ site.author.name }}">
 
@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
   -->
+    {% include JB/analytics %}
   </head>
 
   <body>
@@ -46,7 +47,7 @@
       </div>
 
       <footer>
-        <p>&copy; {{ site.author.name }} 2012 
+        <p>&copy; 2012 {{ site.author.name }} 2012
           with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
           and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
         </p>
@@ -54,6 +55,5 @@
 
     </div> <!-- /container -->
 
-    {% include JB/analytics %}
   </body>
 </html>

@@ -4,6 +4,8 @@ title: "So Where Does This iPad Thing Fit?"
 category:
 tags: []
 ---
+*Originally posted on the [dynamIt Blog](http://www.dynamit.us/blog/2010/04/so-where-does-this-ipad-thing-fit/).*
+
 I’m writing this post – you guessed it – on my iPad.
 
 I’ll admit I was a bit underwhelmed by Steve Jobs’ initial keynote announcement of this new device. Caught up in the pre-announcement hype, I suffered with many others what my fellow roller coaster enthusiasts call “anticipointment” – the device had been so over-hyped that no announcement would live up to the other-worldly expectations we had fabricated in our own imagination.

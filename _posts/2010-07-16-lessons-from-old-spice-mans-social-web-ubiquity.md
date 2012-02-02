@@ -4,6 +4,8 @@ title: "Lessons from Old Spice Man’s Social Web Ubiquity"
 category:
 tags: []
 ---
+*Originally posted on the [dynamIt Blog](http://www.dynamit.us/blog/2010/07/lessons-from-old-spice-mans-social-web-ubiquity/).*
+
 If you’ve been unplugged from your favorite social network the past few days, you might have missed one of the most impressive social web campaigns in recent memory. If you’ve been active on Twitter or Facebook, I’m not sure how you could have missed this: Procter &amp; Gamble launched an amazing social campaign to promote their Old Spice body washes.
 
 Combating the notion that body wash is only for ladies and recognizing market research shows that women purchase as much as 70% of the shower gel for men in their households, P&amp;G’s partner agency Wieden &amp; Kennedy based in Portland, Oregon launched the TV campaign in February called “Smell Like a Man, Man.” The commercials feature actor Isaiah Mustafa speaking directly to women of the household while portraying an over-the-top manly man that does not alienate or belittle men, but reaffirms that it’s okay (and even desirable) to be a masculine man.
