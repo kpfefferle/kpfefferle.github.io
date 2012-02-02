@@ -33,4 +33,4 @@ I picked up my [Apple Magic Mouse](http://www.apple.com/magicmouse/) a couple we
 
 MUCH better than the default back/forward swipe functionality!
 
-*UPDATE (12/14/09): If you are interested in doing much more with your Mighty Mouse than this, you might want to check out [BetterTouchTool](http://blog.boastr.net/), a utility for adjusting all sorts of gestures for both the MacBook touch pad and the Mighty Mouse (they have good taste in WP theme also)!
+**UPDATE (12/14/09):** If you are interested in doing much more with your Mighty Mouse than this, you might want to check out [BetterTouchTool](http://blog.boastr.net/), a utility for adjusting all sorts of gestures for both the MacBook touch pad and the Mighty Mouse (they have good taste in WP theme also)!
