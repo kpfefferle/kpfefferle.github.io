@@ -25,6 +25,6 @@ These passwords make me cringe, as it would take a hacker no time at all to comp
 
 If you attempt to set your password to something that we have identified as too common, you will be kindly prompted to choose something else. Consider it a kind nudge from Receept to improve your safety and security online :)
 
-[1] http://brandery.org/
-[2] http://agilebits.com/products/1Password
-[3] http://www.imperva.com/docs/WP_Consumer_Password_Worst_Practices.pdf
+[1]: http://brandery.org/
+[2]: http://agilebits.com/products/1Password
+[3]: http://www.imperva.com/docs/WP_Consumer_Password_Worst_Practices.pdf
