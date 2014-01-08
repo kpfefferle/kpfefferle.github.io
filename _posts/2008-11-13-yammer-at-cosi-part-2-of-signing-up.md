@@ -11,7 +11,7 @@ meta:
   btc_comment_counts: a:0:{}
   btc_comment_summary: a:0:{}
 ---
-I have had some good response to [my first blog about Yammer](http://kevinpfefferle.com/2008/11/12/yammer-at-cosi-part-1-of-what-is-yammer/) (the [Yammer Team even Twittered about it](http://twitter.com/yammer_team/status/1003157070)!), so I figure I'll try to keep the momentum going (and keep you from waiting) by continuing the conversation today.
+I have had some good response to [my first blog about Yammer](http://kevin.pfefferle.co/2008/11/12/yammer-at-cosi-part-1-of-what-is-yammer/) (the [Yammer Team even Twittered about it](http://twitter.com/yammer_team/status/1003157070)!), so I figure I'll try to keep the momentum going (and keep you from waiting) by continuing the conversation today.
 
 ## Part 2: Signing Up for Yammer
 
