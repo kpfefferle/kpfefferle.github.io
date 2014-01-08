@@ -3,9 +3,9 @@
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink: /:year/:month/:day/:title
 =======
-# This is the default format. 
+# This is the default format.
 # For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:categories/:year/:month/:day/:title 
+permalink: /:categories/:year/:month/:day/:title
 >>>>>>> upstream/master
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
@@ -18,7 +18,7 @@ title : Kevin Pfefferle
 tagline:
 author :
   name : Kevin Pfefferle
-  email : kevin@kevinpfefferle.com
+  email : kevin@pfefferle.co
   github : KPfefferle
   twitter : KPfefferle
   feedburner : http://feeds.feedburner.com/KevinPfefferle
@@ -31,11 +31,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-<<<<<<< HEAD
-production_url : http://kevinpfefferle.com
-=======
-production_url : http://username.github.io
->>>>>>> upstream/master
+production_url : http://kevin.pfefferle.co
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -47,14 +43,11 @@ JB :
   # however this value will be dynamically changed depending on your deployment situation.
   #
   # CNAME (http://yourcustomdomain.com)
-  #   DO NOT SET BASE_PATH 
+  #   DO NOT SET BASE_PATH
   #   (urls will be prefixed with "/" and work relatively)
   #
-<<<<<<< HEAD
-  BASE_PATH : "http://kevinpfefferle.com"
-=======
   # GitHub Pages (http://username.github.io)
-  #   DO NOT SET BASE_PATH 
+  #   DO NOT SET BASE_PATH
   #   (urls will be prefixed with "/" and work relatively)
   #
   # GitHub Project Pages (http://username.github.io/project-name)
@@ -68,7 +61,6 @@ JB :
   #   - When setting BASE_PATH it must be a valid url.
   #     This means always setting the protocol (http|https) or prefixing with "/"
   BASE_PATH : false
->>>>>>> upstream/master
 
   # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
   # ex: [BASE_PATH]/assets/themes/[THEME-NAME]
@@ -102,39 +94,26 @@ JB :
     intensedebate :
       account : 123abc
     facebook :
-<<<<<<< HEAD
-      apikey : 123
-
-=======
       appid : 123
       num_posts: 5
       width: 580
       colorscheme: light
-   
->>>>>>> upstream/master
+
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.
   #
   analytics :
-<<<<<<< HEAD
     provider : google
     google :
         tracking_id : 'UA-11977683-1'
     getclicky :
       site_id :
-=======
-    provider : google 
-    google : 
-        tracking_id : 'UA-123-12'
-    getclicky :
-      site_id : 
     mixpanel :
         token : '_MIXPANEL_TOKEN_'
     piwik :
         baseURL : 'myserver.tld/piwik' # Piwik installation address (without protocol)
         idsite : '1'                   # the id of the site on Piwik
->>>>>>> upstream/master
 
   # Settings for sharing helper.
   # Sharing is for things like tweet, plusone, like, reddit buttons etc.
