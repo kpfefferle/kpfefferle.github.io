@@ -127,11 +127,11 @@ Now when I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-eas
 
 ## Step 2: Distribute S3 Assets via CloudFront
 
-At this point, I could just change my DNS settings to point `app.[appdomain].com` at the S3 bucket since it's set up for static site hosting (and its name matches the subdomain). However, there are two reasons that I want to press forward and distribute my Ember app through CloudFront. First, S3 does not support SSL for custom domains while CloudFront does. Second, CloudFront gives my application assets the speed boost that comes with being distributed to and delivered from CloudFront's edge locations around the world.
+At this point, I could change my DNS settings to point `app.[appdomain].com` at the S3 bucket since it's set up for static site hosting (and the bucket name matches the subdomain). However, there are two reasons that I want to distribute my Ember app through CloudFront instead. First, S3 does not support SSL for custom domains. Second, CloudFront gives my application assets the speed boost that comes with being distributed to and delivered from CloudFront's edge locations around the world.
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
 1. Under **Web**, click **Get Started**.
-1. Fill **Origin Domain Name** with the *S3 Hosting Endpoint* (NOT the name of the bucket). This is the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` address that I was testing at the end of my S3 setup.
+1. Fill **Origin Domain Name** with the S3 Hosting Endpoint (NOT the name of the bucket). This is the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` address that I was testing in the browser at the end of my S3 setup.
 1. Leave most of the settings in this form set to their defaults, but set **Default Root Object** to `index.html`. This will load my application when I visit the CloudFront root path.
 1. Click **Create Distribution**.
 
@@ -159,17 +159,17 @@ Now I visit `app.[appdomain].com`, and I see my Ember app delivered via CloudFro
 1. Under the **Static Website Hosting** settings, open **Edit Redirection Rules** (if it's not already open).
 1. Edit the  the `<HostName>` value to replace the S3 Endpoint with the custom domain `app.[appdomain].com`:
 
-<pre><code>&lt;RoutingRules&gt;
-    &lt;RoutingRule&gt;
-        &lt;Condition&gt;
-            &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
-        &lt;/Condition&gt;
-        &lt;Redirect&gt;
-            &lt;HostName&gt;app.[appdomain].com&lt;/HostName&gt;
-            &lt;ReplaceKeyPrefixWith&gt;#!/&lt;/ReplaceKeyPrefixWith&gt;
-        &lt;/Redirect&gt;
-    &lt;/RoutingRule&gt;
-&lt;/RoutingRules&gt;</code></pre>
+    <pre><code>&lt;RoutingRules&gt;
+        &lt;RoutingRule&gt;
+            &lt;Condition&gt;
+                &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
+            &lt;/Condition&gt;
+            &lt;Redirect&gt;
+                &lt;HostName&gt;app.[appdomain].com&lt;/HostName&gt;
+                &lt;ReplaceKeyPrefixWith&gt;#!/&lt;/ReplaceKeyPrefixWith&gt;
+            &lt;/Redirect&gt;
+        &lt;/RoutingRule&gt;
+    &lt;/RoutingRules&gt;</code></pre>
 
 1. Click **Save**.
 
