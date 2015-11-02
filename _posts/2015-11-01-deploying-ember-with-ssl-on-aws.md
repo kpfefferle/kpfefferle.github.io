@@ -208,6 +208,18 @@ Now I can use the following command to upload my SSL certificate to AWS:
 
 Be sure to change `[appdomain]` to something recognizable for the project.
 
+Now I can tell CloudFront to use this SSL certificate for my custom domain:
+
+1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
+1. Select the CloudFront distribution, then click **Distribution Settings**.
+1. On the **General** tab, click **Edit**.
+1. Under **SSL Certificate**, choose **Custom SSL Certificate (stored in AWS IAM)**.
+1. In the dropdown, I select the certificate by the `[appdomain]` name I gave it in the aws-cli upload command.
+1. Under **Custom SSL Client Support**, make sure that **Only Clients that Support Server Name Indication (SNI)** is selected. This option supports all modern browsers at no additional cost.
+1. Click **Yes, Edit** to save this change.
+
+Once again, it will take CloudFront a short while to update this change throughout its network.
+
 ## Deploying Future Versions
 
 Whenever I've made changes to my Ember app that are ready to be deployed, I can deploy them with the same simple command:
