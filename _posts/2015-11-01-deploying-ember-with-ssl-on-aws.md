@@ -218,17 +218,25 @@ Now I can tell CloudFront to use this SSL certificate for my custom domain:
 1. Under **Custom SSL Client Support**, make sure that **Only Clients that Support Server Name Indication (SNI)** is selected. This option supports all modern browsers at no additional cost.
 1. Click **Yes, Edit** to save this change.
 
-Once again, it will take CloudFront a short while to update this change throughout its network.
+Once again, it will take CloudFront a short while to update this change throughout its network. Now that I can serve my Ember app over SSL, I want to make sure that my users actually use it. I can do this by forcing all requests to use HTTPS:
+
+1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
+1. Select the CloudFront distribution, then click **Distribution Settings**.
+1. Click the **Behaviors** tab, select the Default behavior, then click the **Edit** button.
+1. Change the **Viewer Pretocol Policy** setting to **Redirect HTTP to HTTPS**.
+1. Click **Yes, Edit** to save this change.
+
+After CloudFront updates this change through its network, anyone accessing my Ember app over HTTP will automatically be redirected to the HTTPS version.
 
 ## Deploying Future Versions
 
-Whenever I've made changes to my Ember app that are ready to be deployed, I can deploy them with the same simple command:
+Whenever I've made changes to my Ember app that are ready to be deployed, I can now easily deploy them with the following ember-cli-deploy command:
 
     $ ember deploy
 
-Fingerprinted assets like the app's CSS and JavaScript have unique names, so I don't need to worry about the CloudFront caching for these objects. I do, however, need to invalidate the CloudFront cache for my `index.html` (replace `[DISTRIBUTIONID]` with the CloudFront ID):
+Fingerprinted assets like the app's CSS and JavaScript have unique names, so I don't need to worry about the CloudFront caching for these objects. I do, however, need to invalidate the CloudFront cache for my `index.html` (replace `[distributionid]` with the proper CloudFront ID):
 
     // This first command only needs to be run once per aws-cli installation to enable the preview CloudFront commands
     $ aws configure set preview.cloudfront true
 
-    $ aws cloudfront create-invalidation --distribution-id [DISTRIBUTIONID] --invalidation-batch "{\"CallerReference\": \"$(uuidgen)\", \"Paths\":{\"Quantity\":1,\"Items\":[\"/index.html\"]}}"
+    $ aws cloudfront create-invalidation --distribution-id [distributionid] --invalidation-batch "{\"CallerReference\": \"$(uuidgen)\", \"Paths\":{\"Quantity\":1,\"Items\":[\"/index.html\"]}}"
