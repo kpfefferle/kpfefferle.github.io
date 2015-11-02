@@ -1,38 +1,38 @@
 ---
 layout: post
-title: "Deploying Ember to AWS with SSL"
+title: "Deploying Ember to AWS CloudFront using ember-cli-deploy"
 description: ""
 category: Ember
 tags: [ember, emberjs, aws, s3, cloudfront, ssl]
 ---
 {% include JB/setup %}
 
-I've been working on a side project in [Ember](http://emberjs.com/), and I really want to serve the app with SSL. The app will be interacting with some 3rd party APIs and authenticating using 3rd party OAuth, so I want to serve it to users with encryption even though the HTML of an Ember app is served statically and the application code runs entirely in the browser.
+I am working on a side project in [Ember](http://emberjs.com/), and I want to serve the app with SSL. This app will be interacting with 3rd party APIs and authenticated using 3rd party OAuth, so I want to serve it to users with encryption as well.
 
-To this point, I've been deploying the app on [Heroku](https://www.heroku.com/) with [heroku-buildpack-ember-cli](https://github.com/tonycoco/heroku-buildpack-ember-cli). While this approach is quick and easy to get up and running, Heroku charges $7/month to keep the dyno awake 24/7 and $20/month to add SSL. I'm not too excited to spend $27/month on a side project app.
+Until now, I've been deploying the app on [Heroku](https://www.heroku.com/) with [heroku-buildpack-ember-cli](https://github.com/tonycoco/heroku-buildpack-ember-cli). The Heroku approach is quick and easy to get up and running, but Heroku will charge me $7/month to keep the app awake and $20/month to use SSL. I don't really want to spend $27/month on a side project if I don't have to.
 
-I've been taking a look at AWS as an alternative. I already pay AWS each month to host remote backups on S3 and I've used S3 and CloudFront before as a CDN for app assets. What follows is the approach I ultimately ended up using.
+I've been taking a look at Amazon Web Services (AWS) as an alternative. I already pay AWS each month to host remote backups on S3, and I've used S3 and CloudFront before as a CDN for Rails app assets. Here are the steps I am taking to set this deployment up:
 
-## Step 1: Deploy ember-cli to S3
+## Step 1: Deploy ember-cli to S3 with ember-cli-deploy
 
-### Create buckets on S3
+### Create a bucket on S3
 
-Most of the steps I'll follow on AWS are [well-documented](http://docs.aws.amazon.com/gettingstarted/latest/swh/website-hosting-intro.html).
+Most of the steps I'm following to set up AWS are [well-documented](http://docs.aws.amazon.com/gettingstarted/latest/swh/website-hosting-intro.html).
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
 1. Click **Create a Bucket**.
-1. Set the **Bucket Name**. I've set mine to match the app's subdomain at `app.[appdomain].com`.
+1. Set the **Bucket Name**. I've set mine to match the app subdomain at `app.[appdomain].com`.
 1. Select a **Region** close to the app's users (for me, this is US Standard).
 1. Click **Create**.
 
 
-#### Bucket Permissions
+### Edit Bucket Permissions
 
-I need to edit the bucket permissions to allow public read access to the files that I deploy.
+I need to edit the bucket permissions to allow public read access to the files that I upload.
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
 1. Select the `app.[appdomain].com` bucket, click **Properties**, click **Permissions**, and click **Add bucket policy**
-1. Copy and paste the following policy into the Bucket Policy Editor (be sure to change `app.[appdomain].com` to match the name of the bucket):
+1. Copy and paste the following policy into the Bucket Policy Editor (change `app.[appdomain].com` to match the name of the bucket):
 
 <pre><code>{
   "Version":"2012-10-17",
@@ -53,7 +53,7 @@ I need to create a set of access keys that allow upload access to S3.
 
 1. Open the [AWS IAM Console](https://console.aws.amazon.com/iam/).
 1. Click **Users**, then click **Create New Users**.
-1. In box **1**, type a name for the user, then click **Create**.
+1. In box **1**, type a name for the user (I used the name of my Ember app), then click **Create**.
 1. Click **Show User Credentials** and copy the Access Key ID and Secret Access Key into a file named `.env.deploy.production` in the root of the ember-cli app:
 
 <pre><code>AWS_KEY=[Access Key ID]
@@ -61,24 +61,24 @@ AWS_SECRET=[Secret Access Key]
 AWS_BUCKET=app.[appdomain].com
 AWS_REGION=us-east-1</code></pre>
 
-1. Click **close** twice to return to the list of users.
+1. Click **close** (and again to confirm) to return to the list of users.
 1. Click on the new user, click the **Permissions** tab, and click **Attach Policy**.
-1. Select the policy named "AmazonS3FullAccess" and click **Attach Policy**.
+1. Select the policy named **AmazonS3FullAccess** and click **Attach Policy**.
 
-### Install ember-cli-deploy
+### Install the ember-cli-deploy addon
 
 I've admired the [ember-cli-deploy](http://ember-cli.github.io/ember-cli-deploy/) project from a distance since [Luke Melia's great talk on deploying Ember apps at EmberConf](https://www.youtube.com/watch?v=4EDetv_Rw5U). This seems like a great chance to try it out.
 
     $ ember install ember-cli-deploy
 
-I'm going to deploy everything (including `index.html`) to S3, so I've also installed the following ember-cli-deploy plugins:
+I'm going to deploy everything (including my `index.html`) to S3, so I've installed the following [ember-cli-deploy plugins](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugins/):
 
     $ ember install ember-cli-deploy-build
     $ ember install ember-cli-deploy-gzip
     $ ember install ember-cli-deploy-manifest
     $ ember install ember-cli-deploy-s3
 
-Now I need to add the following configuration to `config/deploy.js` to load the config variables that I set in `.env.deploy.production` as well as tell ember-cli-deploy to upload all files (including `index.html`):
+Now I need to add the following configuration to `config/deploy.js` to load the variables that I set in `.env.deploy.production` as well as tell ember-cli-deploy to upload all files (including `index.html`):
 
     ENV.s3 {
       accessKeyId: process.env.AWS_KEY,
@@ -88,26 +88,26 @@ Now I need to add the following configuration to `config/deploy.js` to load the 
       filePattern: "*"
     }
 
-Now I can upload my application build to S3 with one command:
+Now I can upload my Ember application build to S3 with one command:
 
     $ ember deploy
 
 ### Enable Static Site Hosting on S3
 
-To view the app, I need to enable static site hosting on my S3 bucket:
+To use the app, I need to enable static site hosting on my S3 bucket:
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
 1. Select the app.[appdomain].com bucket, click **Properties**, then click **Static Website Hosting**.
 1. Click **Enable Website Hosting**.
-1. Set **Index Document** to "index.html".
+1. Set **Index Document** to `index.html`.
 1. Click **Save**.
 
 ### Set S3 Routing Rules
 
-If I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I will now see my Ember app loaded in the browser! However, if I try to reload the page on any URL but the root, I get a 404 error. I need to configure routing rules so that S3 knows to route all requests to my `index.html`:
+When I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I see my Ember app running in the browser! However, when I reload the page on any route but the root, I see a 404 error. I need to configure routing rules so that S3 knows to route all requests to `index.html`:
 
 1. Under the **Static Website Hosting** settings, click **Edit Redirection Rules**.
-1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the actual bucket name):
+1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the bucket name):
 
 <pre><code>&lt;RoutingRules&gt;
     &lt;RoutingRule&gt;
@@ -123,23 +123,23 @@ If I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.am
 
 1. Click **Save**.
 
-Now if I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I can reload any route URL and my Ember app will load the proper state without a 404!
+Now when I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I can reload any route and my Ember app will render the proper state without the 404.
 
 ## Step 2: Distribute S3 Assets via CloudFront
 
-At this point, I could change my DNS settings for `app.[appdomain].com` and point them at the S3 bucket since it's set up for static site hosting. But there are two reasons I want to press forward and distribute my Ember app through CloudFront. First, S3 does not support SSL for custom domains and CloudFront does. Second, CloudFront gives my application assets the speed boost that comes with being distributed to and delivered from CloudFront's edge locations around the world.
+At this point, I could just change my DNS settings to point `app.[appdomain].com` at the S3 bucket since it's set up for static site hosting (and its name matches the subdomain). However, there are two reasons that I want to press forward and distribute my Ember app through CloudFront. First, S3 does not support SSL for custom domains while CloudFront does. Second, CloudFront gives my application assets the speed boost that comes with being distributed to and delivered from CloudFront's edge locations around the world.
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
 1. Under **Web**, click **Get Started**.
-1. Fill **Origin Domain Name** with the *S3 Hosting Endpoint* (NOT the name of the bucket!!!). For this example, this is the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` address that I was testing at the end of the S3 setup.
+1. Fill **Origin Domain Name** with the *S3 Hosting Endpoint* (NOT the name of the bucket). This is the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` address that I was testing at the end of my S3 setup.
 1. Leave most of the settings in this form set to their defaults, but set **Default Root Object** to `index.html`. This will load my application when I visit the CloudFront root path.
 1. Click **Create Distribution**.
 
-It can take up to 15 minutes to create the CloudFront distribution. Once the **Status** column in the CloudFront list switches from "In Progress" to "Deployed", the distribution is complete. At this point, I can visit the CloudFront domain name at `[cloudfrontcode].cloudfront.net` and my Ember app should work here just as it did at the S3 Endpoint. If I refresh a route other than the root, it will redirect back to the S3 URL, but I will update the redirect rules once my custom domain is set up.
+It takes up to 15 minutes to create the CloudFront distribution. Once the **Status** column in the CloudFront list switches from "In Progress" to "Deployed", the distribution is complete. Now I visit the CloudFront domain name at `[cloudfrontcode].cloudfront.net`, and my Ember app works here just as it did at the S3 Endpoint. When I refresh a route other than the root, it still redirects to the S3 Endpoint, but I will update the redirect rules after my custom domain is set up.
 
 ## Step 3: Use Custom Domain for CloudFront
 
-Now that my Ember app is being served by CloudFront, I want to be able to access it using `app.[appdomain].com` instead of the unattractive `[cloudfrontcode].cloudfront.net`.
+Now that my Ember app is being served by CloudFront, I want to access it using `app.[appdomain].com` instead of the unattractive `[cloudfrontcode].cloudfront.net`.
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
 1. Select the CloudFront distribution I just created, then click **Distribution Settings**.
@@ -147,17 +147,17 @@ Now that my Ember app is being served by CloudFront, I want to be able to access
 1. In **Alternate Domain Names (CNAMEs)**, enter the `app.[appdomain].com` custom domain that I want to use.
 1. Click **Yes, Edit** to save this change.
 
-It will take some time for this change to take effect. Once again, I can watch the **Status** column to change from "In Progress" to "Deployed". In the meantime, I'll set the DNS for `app.[appdomain].com` to point at CloudFront.
+It takes some time for this change to take effect. Once again, I watch for the **Status** column to change from "In Progress" to "Deployed". In the meantime, I set the DNS for `app.[appdomain].com` to point at CloudFront.
 
 1. Open the domain's DNS settings (mine are managed on [DNSimple](https://dnsimple.com)).
 1. Create a `CNAME` record that sets `app.[appdomain].com` as an alias for the CloudFront distribution at `[cloudfrontcode].cloudfront.net`.
 
-Now when I visit `app.[appdomain].com`, I see my Ember app delivered via CloudFront! However, I still get redirected to the S3 Endpoint when I reload any non-root URL. I'll update the S3 Redirection Rules to change this:
+Now I visit `app.[appdomain].com`, and I see my Ember app delivered via CloudFront. However, I still get redirected to the S3 Endpoint when I reload any non-root URL. To fix this, I update the S3 Redirection Rules:
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
-1. Select the app.[appdomain].com bucket, click **Properties**, then click **Static Website Hosting**.
+1. Select the `app.[appdomain].com` bucket, click **Properties**, then click **Static Website Hosting**.
 1. Under the **Static Website Hosting** settings, open **Edit Redirection Rules** (if it's not already open).
-1. Edit the  the `<HostName>` value to replace the full S3 Endpoint with just `app.[appdomain].com`:
+1. Edit the  the `<HostName>` value to replace the S3 Endpoint with the custom domain `app.[appdomain].com`:
 
 <pre><code>&lt;RoutingRules&gt;
     &lt;RoutingRule&gt;
@@ -173,18 +173,18 @@ Now when I visit `app.[appdomain].com`, I see my Ember app delivered via CloudFr
 
 1. Click **Save**.
 
-Now non-root URLs will redirect properly to my custom domain. Note that CloudFront is **very** aggressive with caching, so since I tested the non-root redirects through the CloudFront before changing the redirect rules, I need to invalidate the current CloudFront cache *(these steps can be skipped if none of the non-root URLs were loaded through CloudFront before the redirect was updated)*:
+Now reloading non-root URLs redirects properly to my custom domain. CloudFront is **very** aggressive with caching, so since I tested the non-root redirects through the CloudFront before changing the redirect rules, I also need to invalidate the current CloudFront cache *(these steps can be skipped if the non-root URLs have not been reloaded using the CloudFront URL)*:
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
 1. Select the CloudFront distribution I just created, then click **Distribution Settings**.
 1. Click the **Invalidations** tab, then click **Create Invalidation**.
 1. Set **Object Paths** to `*` (all objects) and click **Invalidate**.
 
-As with any CloudFront change, it will take a bit of time for the invalidation to occur across all of the CloudFront edge locations. I can monitor this again by watching the invalidation's **Status** column.
+As with any CloudFront change, it takes a bit of time for the invalidation to occur across all of the CloudFront edge locations. I monitor this again by watching the invalidation's **Status** column.
 
 ## Step 4: Add SSL to CloudFront
 
-Now I can finally realize my ultimate goal: serving my Ember app over SSL. First, I must obtain an SSL certificate from any of a number of Certificate Authorities. I typically purchase my production-grade SSL certificates from [DNSimple](https://dnsimple.com) so I can manage them alongside my domain registration and DNS records, but for this side project I'll just use a free SSL certificate from [StartSSL](https://www.startssl.com).
+Now I finally am realizing my ultimate goal: serving my Ember app over SSL. First, I obtain an SSL certificate from a Certificate Authority. I typically purchase production SSL certificates from [DNSimple](https://dnsimple.com) to manage them alongside my domain registrations and DNS records, but for this side project I'm using a free SSL certificate from [StartSSL](https://www.startssl.com).
 
 From StartSSL, I get a few different files:
 
@@ -193,7 +193,7 @@ From StartSSL, I get a few different files:
 - `sub.class1.server.ca.pem` contains StartSSL's intermediate certificates
 - `ca.pem` contains StartSSL's root certificate
 
-Amazon requires a single file for StartSSL's certificates, so I run the following command to combine `sub.class1.server.ca.pem` and `ca.pem` into one file that contains both:
+Amazon requires a single file for the CA's certificates, so I run the following command to combine `sub.class1.server.ca.pem` and `ca.pem` into one file that contains both:
 
     $ cat sub.class1.server.ca.pem ca.pem > ca-bundle.pem
 
@@ -202,23 +202,23 @@ Uploading the certificate files requires the [AWS Command Line Interface](http:/
     $ brew install awscli
     $ aws configure
 
-Now I can use the following command to upload my SSL certificate to AWS:
+Now I use the following command to upload my SSL certificate to AWS:
 
     $ aws iam upload-server-certificate --server-certificate-name [appdomain] --certificate-body file:///path/to/certificates/ssl.crt --private-key file:///path/to/certificates/ssl.key --certificate-chain file:///path/to/certificates/ca-bundle.pem --path /cloudfront/[appdomain]/
 
-Be sure to change `[appdomain]` to something recognizable for the project.
+This command requires the full `file://` path to each file. Be sure to change `[appdomain]` in both cases to something recognizable for the project.
 
-Now I can tell CloudFront to use this SSL certificate for my custom domain:
+Now I tell CloudFront to use the uploaded SSL certificate for my custom CloudFront domain:
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
 1. Select the CloudFront distribution, then click **Distribution Settings**.
 1. On the **General** tab, click **Edit**.
 1. Under **SSL Certificate**, choose **Custom SSL Certificate (stored in AWS IAM)**.
 1. In the dropdown, I select the certificate by the `[appdomain]` name I gave it in the aws-cli upload command.
-1. Under **Custom SSL Client Support**, make sure that **Only Clients that Support Server Name Indication (SNI)** is selected. This option supports all modern browsers at no additional cost.
+1. Under **Custom SSL Client Support**, make sure that **Only Clients that Support Server Name Indication (SNI)** is selected. This option supports all modern browsers and does not add to the cost of using CloudFront.
 1. Click **Yes, Edit** to save this change.
 
-Once again, it will take CloudFront a short while to update this change throughout its network. Now that I can serve my Ember app over SSL, I want to make sure that my users actually use it. I can do this by forcing all requests to use HTTPS:
+Once again, it takes CloudFront a short while to update this change throughout its network. Now that I am serving my Ember app over SSL, I want to be make HTTPS the default:
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/).
 1. Select the CloudFront distribution, then click **Distribution Settings**.
@@ -226,17 +226,22 @@ Once again, it will take CloudFront a short while to update this change througho
 1. Change the **Viewer Pretocol Policy** setting to **Redirect HTTP to HTTPS**.
 1. Click **Yes, Edit** to save this change.
 
-After CloudFront updates this change through its network, anyone accessing my Ember app over HTTP will automatically be redirected to the HTTPS version.
+After CloudFront updates this change through its network, anyone accessing my Ember app over HTTP is automatically redirected to the HTTPS version.
 
-## Deploying Future Versions
+## Step 5: Deploying Future Versions
 
-Whenever I've made changes to my Ember app that are ready to be deployed, I can now easily deploy them with the following ember-cli-deploy command:
+Now when I make changes to my Ember app that are ready to be deployed, I can easily deploy them with the ember-cli-deploy command:
 
     $ ember deploy
 
-Fingerprinted assets like the app's CSS and JavaScript have unique names, so I don't need to worry about the CloudFront caching for these objects. I do, however, need to invalidate the CloudFront cache for my `index.html` (replace `[distributionid]` with the proper CloudFront ID):
+Fingerprinted assets like the app's CSS and JavaScript have unique names, so I don't worry about CloudFront caching for these objects. I do, however, need to invalidate the CloudFront cache for my `index.html`. I can do this with the AWS CLI (replace `[distributionid]` with the proper CloudFront ID):
 
     // This first command only needs to be run once per aws-cli installation to enable the preview CloudFront commands
     $ aws configure set preview.cloudfront true
 
     $ aws cloudfront create-invalidation --distribution-id [distributionid] --invalidation-batch "{\"CallerReference\": \"$(uuidgen)\", \"Paths\":{\"Quantity\":1,\"Items\":[\"/index.html\"]}}"
+
+## Next Steps
+
+- I really don't like having to run that ugly CLI command at the end to invalidate my `index.html`, so I'm working on an [ember-cli-deploy plugin](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugins/) to automate this step.
+- Once I've got the invalidation step automated, I plan on creating an [ember-cli-deploy plugin pack](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugin-packs/) that contains all of the plugins needed for this deployment strategy.
