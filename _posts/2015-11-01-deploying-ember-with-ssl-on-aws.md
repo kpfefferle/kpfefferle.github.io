@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Deploying Ember to AWS CloudFront using ember-cli-deploy"
-description: ""
+description: "SSL-friendly approach for deploying static Ember apps"
 category: Ember
-tags: [ember, emberjs, aws, s3, cloudfront, ssl]
+tags: [ember, emberjs, aws, s3, cloudfront, ssl, ember-cli-deploy]
 ---
 {% include JB/setup %}
 
