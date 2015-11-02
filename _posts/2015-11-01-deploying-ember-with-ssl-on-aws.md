@@ -109,19 +109,19 @@ If I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.am
 1. Under the **Static Website Hosting** settings, click **Edit Redirection Rules**.
 1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the actual bucket name):
 
-```xml
-<RoutingRules>
-    <RoutingRule>
-        <Condition>
-            <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals>
-        </Condition>
-        <Redirect>
-            <HostName>app.[appdomain].com.s3-website-us-east-1.amazonaws.com</HostName>
-            <ReplaceKeyPrefixWith>#!/</ReplaceKeyPrefixWith>
-        </Redirect>
-    </RoutingRule>
-</RoutingRules>
-```
+<pre><code>
+&lt;RoutingRules&gt;
+    &lt;RoutingRule&gt;
+        &lt;Condition&gt;
+            &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
+        &lt;/Condition&gt;
+        &lt;Redirect&gt;
+            &lt;HostName&gt;app.[appdomain].com.s3-website-us-east-1.amazonaws.com&lt;/HostName&gt;
+            &lt;ReplaceKeyPrefixWith&gt;#!/&lt;/ReplaceKeyPrefixWith&gt;
+        &lt;/Redirect&gt;
+    &lt;/RoutingRule&gt;
+&lt;/RoutingRules&gt;
+</code></pre>
 
 1. Click **Save**.
 
@@ -161,19 +161,19 @@ Now when I visit `app.[appdomain].com`, I see my Ember app delivered via CloudFr
 1. Under the **Static Website Hosting** settings, open **Edit Redirection Rules** (if it's not already open).
 1. Edit the  the `<HostName>` value to replace the full S3 Endpoint with just `app.[appdomain].com`:
 
-```xml
-<RoutingRules>
-    <RoutingRule>
-        <Condition>
-            <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals>
-        </Condition>
-        <Redirect>
-            <HostName>app.[appdomain].com</HostName>
-            <ReplaceKeyPrefixWith>#!/</ReplaceKeyPrefixWith>
-        </Redirect>
-    </RoutingRule>
-</RoutingRules>
-```
+<pre><code>
+&lt;RoutingRules&gt;
+    &lt;RoutingRule&gt;
+        &lt;Condition&gt;
+            &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
+        &lt;/Condition&gt;
+        &lt;Redirect&gt;
+            &lt;HostName&gt;app.[appdomain].com&lt;/HostName&gt;
+            &lt;ReplaceKeyPrefixWith&gt;#!/&lt;/ReplaceKeyPrefixWith&gt;
+        &lt;/Redirect&gt;
+    &lt;/RoutingRule&gt;
+&lt;/RoutingRules&gt;
+</code></pre>
 
 1. Click **Save**.
 
