@@ -56,10 +56,10 @@ I need to create a set of access keys that allow upload access to S3.
 1. In box **1**, type a name for the user (I used the name of my Ember app), then click **Create**.
 1. Click **Show User Credentials** and copy the Access Key ID and Secret Access Key into a file named `.env.deploy.production` in the root of the ember-cli app:
 
-<pre><code>AWS_KEY=[Access Key ID]
-AWS_SECRET=[Secret Access Key]
-AWS_BUCKET=app.[appdomain].com
-AWS_REGION=us-east-1</code></pre>
+    <pre><code>AWS_KEY=[Access Key ID]
+    AWS_SECRET=[Secret Access Key]
+    AWS_BUCKET=app.[appdomain].com
+    AWS_REGION=us-east-1</code></pre>
 
 1. Click **close** (and again to confirm) to return to the list of users.
 1. Click on the new user, click the **Permissions** tab, and click **Attach Policy**.
