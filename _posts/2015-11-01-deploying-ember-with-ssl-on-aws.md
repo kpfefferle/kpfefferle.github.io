@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Deploying Ember with SSL on AWS"
+title: "Deploying Ember to AWS with SSL"
 description: ""
 category: Ember
 tags: [ember, emberjs, aws, s3, cloudfront, ssl]
@@ -186,7 +186,27 @@ As with any CloudFront change, it will take a bit of time for the invalidation t
 
 Now I can finally realize my ultimate goal: serving my Ember app over SSL. First, I must obtain an SSL certificate from any of a number of Certificate Authorities. I typically purchase my production-grade SSL certificates from [DNSimple](https://dnsimple.com) so I can manage them alongside my domain registration and DNS records, but for this side project I'll just use a free SSL certificate from [StartSSL](https://www.startssl.com).
 
-...(more)...
+From StartSSL, I get a few different files:
+
+- `ssl.crt` contains my certificate
+- `ssl.key` contains my private key
+- `sub.class1.server.ca.pem` contains StartSSL's intermediate certificates
+- `ca.pem` contains StartSSL's root certificate
+
+Amazon requires a single file for StartSSL's certificates, so I run the following command to combine `sub.class1.server.ca.pem` and `ca.pem` into one file that contains both:
+
+    $ cat sub.class1.server.ca.pem ca.pem > ca-bundle.pem
+
+Uploading the certificate files requires the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html). If it's not already installed, it can be installed via Homebrew:
+
+    $ brew install awscli
+    $ aws configure
+
+Now I can use the following command to upload my SSL certificate to AWS:
+
+    $ aws iam upload-server-certificate --server-certificate-name [appdomain] --certificate-body file:///path/to/certificates/ssl.crt --private-key file:///path/to/certificates/ssl.key --certificate-chain file:///path/to/certificates/ca-bundle.pem --path /cloudfront/[appdomain]/
+
+Be sure to change `[appdomain]` to something recognizable for the project.
 
 ## Deploying Future Versions
 
