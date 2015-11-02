@@ -7,11 +7,11 @@ tags: [ember, emberjs, aws, s3, cloudfront, ssl, ember-cli-deploy]
 ---
 {% include JB/setup %}
 
-I am working on a side project in [Ember](http://emberjs.com/), and I want to serve the app with SSL. This app will be interacting with 3rd party APIs and authenticated using 3rd party OAuth, so I want to serve it to users with encryption as well.
+I am working on a side project in [Ember](http://emberjs.com/), and I want to serve the app with SSL. This app will be interacting with 3rd party APIs and authenticating using 3rd party OAuth, so I want to serve it to users with HTTPS encryption.
 
-Until now, I've been deploying the app on [Heroku](https://www.heroku.com/) with [heroku-buildpack-ember-cli](https://github.com/tonycoco/heroku-buildpack-ember-cli). The Heroku approach is quick and easy to get up and running, but Heroku will charge me $7/month to keep the app awake and $20/month to use SSL. I don't really want to spend $27/month on a side project if I don't have to.
+Until now, I've been deploying the app on [Heroku](https://www.heroku.com/) with [heroku-buildpack-ember-cli](https://github.com/tonycoco/heroku-buildpack-ember-cli). The Heroku approach is quick and easy to get up and running, but Heroku would charge $7/month to keep the app awake and $20/month to use SSL. I don't  want to spend $27/month on a side project if I don't have to.
 
-I've been taking a look at Amazon Web Services (AWS) as an alternative. I already pay AWS each month to host remote backups on S3, and I've used S3 and CloudFront before as a CDN for Rails app assets. Here are the steps I am taking to set this deployment up:
+I've been taking a look at Amazon Web Services (AWS) as an alternative. I already pay AWS each month to host remote backups on S3, and I've used S3 and CloudFront before as a CDN for Rails app assets. Here are the steps I am taking to deploy my static Ember app on AWS:
 
 ## Step 1: Deploy ember-cli to S3 with ember-cli-deploy
 
@@ -21,8 +21,8 @@ Most of the steps I'm following to set up AWS are [well-documented](http://docs.
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
 1. Click **Create a Bucket**.
-1. Set the **Bucket Name**. I've set mine to match the app subdomain at `app.[appdomain].com`.
-1. Select a **Region** close to the app's users (for me, this is US Standard).
+1. Set the **Bucket Name**. I've set mine to match the app subdomain I am using: `app.[appdomain].com`.
+1. Select a **Region** close to the app's expected users (for me, this is US Standard).
 1. Click **Create**.
 
 
@@ -34,16 +34,16 @@ I need to edit the bucket permissions to allow public read access to the files t
 1. Select the `app.[appdomain].com` bucket, click **Properties**, click **Permissions**, and click **Add bucket policy**
 1. Copy and paste the following policy into the Bucket Policy Editor (change `app.[appdomain].com` to match the name of the bucket):
 
-<pre><code>{
-  "Version":"2012-10-17",
-  "Statement": [{
-    "Sid": "Allow Public Access to All Objects",
-    "Effect": "Allow",
-    "Principal": "*",
-    "Action": "s3:GetObject",
-    "Resource": "arn:aws:s3:::app.[appdomain].com/*"
-  }]
-}</code></pre>
+    <pre><code>{
+      "Version":"2012-10-17",
+      "Statement": [{
+        "Sid": "Allow Public Access to All Objects",
+        "Effect": "Allow",
+        "Principal": "*",
+        "Action": "s3:GetObject",
+        "Resource": "arn:aws:s3:::app.[appdomain].com/*"
+      }]
+    }</code></pre>
 
 1. Click **Save**.
 
