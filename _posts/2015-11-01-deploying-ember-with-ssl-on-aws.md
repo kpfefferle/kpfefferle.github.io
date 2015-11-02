@@ -85,7 +85,7 @@ Now I need to add the following configuration to `config/deploy.js` to load the 
       secretAccessKey: process.env.AWS_SECRET,
       bucket: process.env.AWS_BUCKET,
       region: process.env.AWS_REGION,
-      filePattern: "\*"
+      filePattern: "*"
     }
 
 Now I can upload my application build to S3 with one command:
