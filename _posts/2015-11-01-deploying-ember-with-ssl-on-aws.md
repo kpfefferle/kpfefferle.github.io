@@ -21,10 +21,9 @@ Most of the steps I'll follow on AWS are [well-documented](http://docs.aws.amazo
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
 1. Click **Create a Bucket**.
-1. In the **Create a Bucket** dialog box:
-  1. Set the **Bucket Name**. I've set mine to match the app's subdomain at `app.[appdomain].com`.
-  1. Select a **Region** close to the app's users (for me, this is US Standard).
-  1. Click **Create**.
+1. Set the **Bucket Name**. I've set mine to match the app's subdomain at `app.[appdomain].com`.
+1. Select a **Region** close to the app's users (for me, this is US Standard).
+1. Click **Create**.
 
 
 #### Bucket Permissions
@@ -34,6 +33,7 @@ I need to edit the bucket permissions to allow public read access to the files t
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
 1. Select the `app.[appdomain].com` bucket, click **Properties**, click **Permissions**, and click **Add bucket policy**
 1. Copy and paste the following policy into the Bucket Policy Editor (be sure to change `app.[appdomain].com` to match the name of the bucket):
+
     {
       "Version":"2012-10-17",
       "Statement": [{
@@ -44,6 +44,7 @@ I need to edit the bucket permissions to allow public read access to the files t
         "Resource": "arn:aws:s3:::app.[appdomain].com/*"
       }]
     }
+
 1. Click **Save**.
 
 ### Create AWS Access Keys
@@ -54,10 +55,12 @@ I need to create a set of access keys that allow upload access to S3.
 1. Click **Users**, then click **Create New Users**.
 1. In box **1**, type a name for the user, then click **Create**.
 1. Click **Show User Credentials** and copy the Access Key ID and Secret Access Key into a file named `.env.deploy.production` in the root of the ember-cli app:
+
     AWS_KEY=[Access Key ID]
     AWS_SECRET=[Secret Access Key]
     AWS_BUCKET=app.[appdomain].com
     AWS_REGION=us-east-1
+
 1. Click **close** twice to return to the list of users.
 1. Click on the new user, click the **Permissions** tab, and click **Attach Policy**.
 1. Select the policy named "AmazonS3FullAccess" and click **Attach Policy**.
@@ -105,6 +108,7 @@ If I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.am
 
 1. Under the **Static Website Hosting** settings, click **Edit Redirection Rules**.
 1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the actual bucket name):
+
     <RoutingRules>
         <RoutingRule>
             <Condition>
@@ -116,6 +120,7 @@ If I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.am
             </Redirect>
         </RoutingRule>
     </RoutingRules>
+
 1. Click **Save**.
 
 Now if I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I can reload any route URL and my Ember app will load the proper state without a 404!
@@ -153,6 +158,7 @@ Now when I visit `app.[appdomain].com`, I see my Ember app delivered via CloudFr
 1. Select the app.[appdomain].com bucket, click **Properties**, then click **Static Website Hosting**.
 1. Under the **Static Website Hosting** settings, open **Edit Redirection Rules** (if it's not already open).
 1. Edit the  the `<HostName>` value to replace the full S3 Endpoint with just `app.[appdomain].com`:
+
     <RoutingRules>
         <RoutingRule>
             <Condition>
@@ -164,6 +170,7 @@ Now when I visit `app.[appdomain].com`, I see my Ember app delivered via CloudFr
             </Redirect>
         </RoutingRule>
     </RoutingRules>
+
 1. Click **Save**.
 
 Now non-root URLs will redirect properly to my custom domain. Note that CloudFront is **very** aggressive with caching, so since I tested the non-root redirects through the CloudFront before changing the redirect rules, I need to invalidate the current CloudFront cache *(these steps can be skipped if none of the non-root URLs were loaded through CloudFront before the redirect was updated)*:
