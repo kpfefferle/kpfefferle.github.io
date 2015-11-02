@@ -228,7 +228,7 @@ Once again, it takes CloudFront a short while to update this change throughout i
 
 After CloudFront updates this change through its network, anyone accessing my Ember application over HTTP is automatically redirected to the HTTPS version.
 
-## Step 5: Deploying Future Versions
+## Step 5: Deploying Future Revisions
 
 When I make changes to my Ember application that are ready to be deployed, I can easily deploy them with the ember-cli-deploy command:
 
