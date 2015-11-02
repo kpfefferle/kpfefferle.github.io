@@ -34,8 +34,7 @@ I need to edit the bucket permissions to allow public read access to the files t
 1. Select the `app.[appdomain].com` bucket, click **Properties**, click **Permissions**, and click **Add bucket policy**
 1. Copy and paste the following policy into the Bucket Policy Editor (be sure to change `app.[appdomain].com` to match the name of the bucket):
 
-<pre><code>
-{
+<pre><code>{
   "Version":"2012-10-17",
   "Statement": [{
     "Sid": "Allow Public Access to All Objects",
@@ -44,8 +43,7 @@ I need to edit the bucket permissions to allow public read access to the files t
     "Action": "s3:GetObject",
     "Resource": "arn:aws:s3:::app.[appdomain].com/*"
   }]
-}
-</code></pre>
+}</code></pre>
 
 1. Click **Save**.
 
@@ -58,12 +56,10 @@ I need to create a set of access keys that allow upload access to S3.
 1. In box **1**, type a name for the user, then click **Create**.
 1. Click **Show User Credentials** and copy the Access Key ID and Secret Access Key into a file named `.env.deploy.production` in the root of the ember-cli app:
 
-<pre><code>
-AWS_KEY=[Access Key ID]
+<pre><code>AWS_KEY=[Access Key ID]
 AWS_SECRET=[Secret Access Key]
 AWS_BUCKET=app.[appdomain].com
-AWS_REGION=us-east-1
-</code></pre>
+AWS_REGION=us-east-1</code></pre>
 
 1. Click **close** twice to return to the list of users.
 1. Click on the new user, click the **Permissions** tab, and click **Attach Policy**.
@@ -113,7 +109,7 @@ If I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.am
 1. Under the **Static Website Hosting** settings, click **Edit Redirection Rules**.
 1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the actual bucket name):
 
-<pre><code>
+```xml
 <RoutingRules>
     <RoutingRule>
         <Condition>
@@ -125,7 +121,7 @@ If I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.am
         </Redirect>
     </RoutingRule>
 </RoutingRules>
-</code></pre>
+```
 
 1. Click **Save**.
 
@@ -165,7 +161,7 @@ Now when I visit `app.[appdomain].com`, I see my Ember app delivered via CloudFr
 1. Under the **Static Website Hosting** settings, open **Edit Redirection Rules** (if it's not already open).
 1. Edit the  the `<HostName>` value to replace the full S3 Endpoint with just `app.[appdomain].com`:
 
-<pre><code>
+```xml
 <RoutingRules>
     <RoutingRule>
         <Condition>
@@ -177,7 +173,7 @@ Now when I visit `app.[appdomain].com`, I see my Ember app delivered via CloudFr
         </Redirect>
     </RoutingRule>
 </RoutingRules>
-</code></pre>
+```
 
 1. Click **Save**.
 
