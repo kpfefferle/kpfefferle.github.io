@@ -94,7 +94,7 @@ Now I can upload my Ember application build to S3 with one command:
 
 ### Enable Static Site Hosting on S3
 
-To use the app, I need to enable static site hosting on my S3 bucket:
+To use the app from S3, I need to enable static site hosting on my S3 bucket:
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/).
 1. Select the app.[appdomain].com bucket, click **Properties**, then click **Static Website Hosting**.
@@ -104,22 +104,22 @@ To use the app, I need to enable static site hosting on my S3 bucket:
 
 ### Set S3 Routing Rules
 
-When I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I see my Ember app running in the browser! However, when I reload the page on any route but the root, I see a 404 error. I need to configure routing rules so that S3 knows to route all requests to `index.html`:
+When I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I see my Ember app running in the browser. However, when I reload the page on any route but the root, I get a 404 error. I need to configure routing rules so that S3 knows to route all route paths to `index.html`:
 
 1. Under the **Static Website Hosting** settings, click **Edit Redirection Rules**.
 1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the bucket name):
 
-<pre><code>&lt;RoutingRules&gt;
-    &lt;RoutingRule&gt;
-        &lt;Condition&gt;
-            &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
-        &lt;/Condition&gt;
-        &lt;Redirect&gt;
-            &lt;HostName&gt;app.[appdomain].com.s3-website-us-east-1.amazonaws.com&lt;/HostName&gt;
-            &lt;ReplaceKeyPrefixWith&gt;#!/&lt;/ReplaceKeyPrefixWith&gt;
-        &lt;/Redirect&gt;
-    &lt;/RoutingRule&gt;
-&lt;/RoutingRules&gt;</code></pre>
+    <pre><code>&lt;RoutingRules&gt;
+        &lt;RoutingRule&gt;
+            &lt;Condition&gt;
+                &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
+            &lt;/Condition&gt;
+            &lt;Redirect&gt;
+                &lt;HostName&gt;app.[appdomain].com.s3-website-us-east-1.amazonaws.com&lt;/HostName&gt;
+                &lt;ReplaceKeyPrefixWith&gt;#!/&lt;/ReplaceKeyPrefixWith&gt;
+            &lt;/Redirect&gt;
+        &lt;/RoutingRule&gt;
+    &lt;/RoutingRules&gt;</code></pre>
 
 1. Click **Save**.
 
