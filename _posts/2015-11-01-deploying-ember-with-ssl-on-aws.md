@@ -186,6 +186,8 @@ As with any CloudFront change, it will take a bit of time for the invalidation t
 
 Now I can finally realize my ultimate goal: serving my Ember app over SSL. First, I must obtain an SSL certificate from any of a number of Certificate Authorities. I typically purchase my production-grade SSL certificates from [DNSimple](https://dnsimple.com) so I can manage them alongside my domain registration and DNS records, but for this side project I'll just use a free SSL certificate from [StartSSL](https://www.startssl.com).
 
+...(more)...
+
 ## Deploying Future Versions
 
 Whenever I've made changes to my Ember app that are ready to be deployed, I can deploy them with the same simple command:
