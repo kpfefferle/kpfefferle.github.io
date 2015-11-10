@@ -5,7 +5,6 @@ description: "SSL-friendly approach for deploying static Ember apps"
 category: Ember
 tags: [ember, emberjs, aws, s3, cloudfront, ssl, ember-cli-deploy]
 ---
-{% include JB/setup %}
 
 I am working on a side project in [Ember](http://emberjs.com/), and I want to serve the application with SSL. This application will be interacting with 3rd party APIs and authenticating using 3rd party OAuth, so I want to serve it to users with HTTPS encryption.
 

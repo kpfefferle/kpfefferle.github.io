@@ -1,10 +1,9 @@
 ---
 layout: post
 title: "Password Security (For Your Own Good)"
-category: 
+category:
 tags: []
 ---
-{% include JB/setup %}
 
 My time today at [The Brandery][1] was spent putting together the core of Receept’s signup/login functionality (a vitally important part of any web app), and I took a little time to implement a solution for what has always been one of my pet peeves.
 

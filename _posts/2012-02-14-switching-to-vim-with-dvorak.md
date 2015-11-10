@@ -4,7 +4,6 @@ title: "Switching to Vim with Dvorak"
 category: Programming
 tags: [vim, dvorak, coda, textmate]
 ---
-{% include JB/setup %}
 
 Last year, I made the switch to using the [Dvorak simplified keyboard][1]. I have never been a very fast typer, and I agreed with the philosophy behind Dvorak: keys are organized based on frequency and patterns of common use (whereas the standard QWERTY layout was actually designed to slow typers down as a method of preventing **typewriter** jams). Since making the switch, I have already improved my typing speed over anything I was able to do with QWERTY.
 
