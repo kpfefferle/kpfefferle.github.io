@@ -1,10 +1,9 @@
 ---
 layout: post
 title: "Lessons in Touch App Design From a 3 Year Old"
-category: 
+category:
 tags: []
 ---
-*Originally posted on the [dynamIt Blog](http://www.dynamit.us/blog/2010/06/lessons-in-touch-app-design-from-a-3-year-old/).*
 
 Whenever we create a web application for a client, we spend a significant amount of time and effort thinking through how the application should behave for its users. It is a priority for us that each element of interaction in an application help the user accomplish their intended goal quickly and efficiently and with a minimum of confusion.
 

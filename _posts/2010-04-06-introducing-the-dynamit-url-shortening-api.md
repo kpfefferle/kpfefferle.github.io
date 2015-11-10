@@ -18,7 +18,6 @@ meta:
   btc_comment_counts: a:0:{}
   btc_post: a:6:{s:2:"ID";s:3:"120";s:13:"post_date_gmt";s:19:"2010-04-06 17:04:42";s:23:"initial_import_date_gmt";s:19:"2010-04-06 17:07:28";s:20:"last_import_date_gmt";s:19:"0000-00-00 00:00:00";s:4:"hits";s:1:"0";s:6:"misses";s:1:"0";}
 ---
-*Originally posted on the [dynamIt Blog](http://www.dynamit.us/blog/2010/03/introducing-the-dynamit-url-shortening-api/).*
 
 While using the [Tweetie 2 Twitter client](http://www.atebits.com/tweetie-iphone/) on my iPhone a couple of weeks ago, I realized the app developer saw fit to include the option of using any URL shortening service I might desire if the shortening service provided an appropriate <abbr title="Application Programming Interface">API</abbr>.
 

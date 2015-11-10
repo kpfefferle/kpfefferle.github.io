@@ -4,7 +4,6 @@ title: "Website vs. Web App – What’s the Difference?"
 category:
 tags:
 ---
-*Originally posted on the [Dynamit Blog](http://www.dynamit.us/blog/2010/04/website-vs-web-app-whats-the-difference/)*
 
 We hear the term “Web app” thrown around a lot in tech circles. We hear about Web apps living in the cloud, mobile Web apps, and Web app development frameworks. However, I suspect that the average web user doesn’t know (and maybe doesn’t care) about the difference between a Web app and a website. Many people think that any URL you type into a browse takes you to a website, resulting in references to things like “that Facebook website.”
 

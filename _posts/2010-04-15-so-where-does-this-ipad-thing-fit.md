@@ -4,7 +4,6 @@ title: "So Where Does This iPad Thing Fit?"
 category:
 tags: []
 ---
-*Originally posted on the [dynamIt Blog](http://www.dynamit.us/blog/2010/04/so-where-does-this-ipad-thing-fit/).*
 
 I’m writing this post – you guessed it – on my iPad.
 

@@ -4,7 +4,6 @@ title: "Lessons from Old Spice Man’s Social Web Ubiquity"
 category:
 tags: []
 ---
-*Originally posted on the [dynamIt Blog](http://www.dynamit.us/blog/2010/07/lessons-from-old-spice-mans-social-web-ubiquity/).*
 
 If you’ve been unplugged from your favorite social network the past few days, you might have missed one of the most impressive social web campaigns in recent memory. If you’ve been active on Twitter or Facebook, I’m not sure how you could have missed this: Procter &amp; Gamble launched an amazing social campaign to promote their Old Spice body washes.
 
