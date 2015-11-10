@@ -3,7 +3,7 @@ layout: post
 title: "Deploying Ember to AWS CloudFront using ember-cli-deploy"
 description: "SSL-friendly approach for deploying static Ember apps"
 category: Ember
-tags: [ember, emberjs, aws, s3, cloudfront, ssl, ember-cli-deploy]
+tags: [ember, aws, s3, cloudfront, ssl, ember-cli-deploy]
 ---
 
 I am working on a side project in [Ember](http://emberjs.com/), and I want to serve the application with SSL. This application will be interacting with 3rd party APIs and authenticating using 3rd party OAuth, so I want to serve it to users with HTTPS encryption.
@@ -244,3 +244,5 @@ Fingerprinted assets like the app's CSS and JavaScript have unique names, so I d
 
 - I really don't like having to run that ugly CLI command at the end to invalidate my `index.html`, so I'm working on an [ember-cli-deploy plugin](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugins/) to automate this step
 - Once I've got the CloudFront invalidation step automated, I plan on creating an [ember-cli-deploy plugin pack](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugin-packs/) that contains all of the plugins needed for this deployment strategy
+
+**UPDATE:** These two enhancements are [now available](/2015/11/10/introducing-ember-cli-deploy-cloudfront-and-ember-cli-deploy-aws-pack/)!
