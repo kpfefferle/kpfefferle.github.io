@@ -24,10 +24,10 @@ The ember-cli-deploy-cloudfront plugin automates the CloudFront cache invalidati
 1. Add CloudFront configuration to `config/deploy.js`
 
     <pre><code>ENV.cloudfront = {
-      accessKeyId: '<your-aws-access-key>',
-      secretAccessKey: '<your-aws-secret>',
-      distribution: '<your-cloudfront-distribution-id>'
-    }</code></pre>
+     accessKeyId: '&lt;your-aws-access-key&gt;',
+     secretAccessKey: '&lt;your-aws-secret'&gt;,
+     distribution: '&lt;your-cloudfront-distribution-id&gt;'
+   }</code></pre>
 
 1. Run the ember-cli-deploy pipeline with the activation flag
 
@@ -42,15 +42,15 @@ Now that I've got a full set of ember-cli-deploy plugins suited to my deployment
 1. Install ember-cli-deploy and the plugin pack
 
     <pre><code>$ ember install ember-cli-deploy
-    $ ember install ember-cli-deploy-aws-pack</code></pre>
+   $ ember install ember-cli-deploy-aws-pack</code></pre>
 
 1. Add deployment configuration secrets to `.env.deploy.production`
 
     <pre><code>AWS_KEY=[Access Key ID]
-    AWS_SECRET=[Secret Access Key]
-    PRODUCTION_BUCKET=[AWS Bucket]
-    PRODUCTION_REGION=[AWS Region]
-    PRODUCTION_DISTRIBUTION=[CloudFront Distribution ID]</code></pre>
+   AWS_SECRET=[Secret Access Key]
+   PRODUCTION_BUCKET=[AWS Bucket]
+   PRODUCTION_REGION=[AWS Region]
+   PRODUCTION_DISTRIBUTION=[CloudFront Distribution ID]</code></pre>
 
 1. Run the ember-cli-deploy pipeline
 
