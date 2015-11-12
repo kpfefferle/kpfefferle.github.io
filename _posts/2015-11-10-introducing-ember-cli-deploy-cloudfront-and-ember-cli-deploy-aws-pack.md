@@ -19,19 +19,19 @@ The ember-cli-deploy-cloudfront plugin automates the CloudFront cache invalidati
 
 1. Install the plugin
 
-    $ ember install ember-cli-deploy-cloudfront
+    <pre><code>$ ember install ember-cli-deploy-cloudfront</code></pre>
 
 1. Add CloudFront configuration to `config/deploy.js`
 
-    ENV.cloudfront = {
+    <pre><code>ENV.cloudfront = {
       accessKeyId: '<your-aws-access-key>',
       secretAccessKey: '<your-aws-secret>',
       distribution: '<your-cloudfront-distribution-id>'
-    }
+    }</code></pre>
 
 1. Run the ember-cli-deploy pipeline with the activation flag
 
-    $ ember deploy production --activate
+    <pre><code>$ ember deploy production --activate</code></pre>
 
 The plugin creates an invalidation with CloudFront for `/index.html` by default, though it can be configured to invalidate other CloudFront objects as well. See the [README](https://github.com/kpfefferle/ember-cli-deploy-cloudfront/blob/master/README.md) for more details.
 
@@ -41,19 +41,19 @@ Now that I've got a full set of ember-cli-deploy plugins suited to my deployment
 
 1. Install ember-cli-deploy and the plugin pack
 
-    $ ember install ember-cli-deploy
-    $ ember install ember-cli-deploy-aws-pack
+    <pre><code>$ ember install ember-cli-deploy
+    $ ember install ember-cli-deploy-aws-pack</code></pre>
 
 1. Add deployment configuration secrets to `.env.deploy.production`
 
-    AWS_KEY=[Access Key ID]
+    <pre><code>AWS_KEY=[Access Key ID]
     AWS_SECRET=[Secret Access Key]
     PRODUCTION_BUCKET=[AWS Bucket]
     PRODUCTION_REGION=[AWS Region]
-    PRODUCTION_DISTRIBUTION=[CloudFront Distribution ID]
+    PRODUCTION_DISTRIBUTION=[CloudFront Distribution ID]</code></pre>
 
 1. Run the ember-cli-deploy pipeline
 
-    $ ember deploy production
+    <pre><code>$ ember deploy production</code></pre>
 
 Notice that the `--activate` flag is no longer necessary since the plugin pack's `config/deploy.js` blueprint sets `ENV.pipeline.activateOnDeploy` to `true`. This can be adjusted as needed (along with any other deploy configuration) to suit the specific use case.
