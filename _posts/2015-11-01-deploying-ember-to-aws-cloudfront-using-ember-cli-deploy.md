@@ -34,15 +34,15 @@ I need to edit the bucket permissions to allow public read access to the files t
 1. Copy and paste the following policy into the Bucket Policy Editor (change `app.[appdomain].com` to match the name of the bucket):
 
     <pre><code>{
-      "Version":"2012-10-17",
-      "Statement": [{
-        "Sid": "Allow Public Access to All Objects",
-        "Effect": "Allow",
-        "Principal": "*",
-        "Action": "s3:GetObject",
-        "Resource": "arn:aws:s3:::app.[appdomain].com/*"
-      }]
-    }</code></pre>
+     "Version":"2012-10-17",
+     "Statement": [{
+       "Sid": "Allow Public Access to All Objects",
+       "Effect": "Allow",
+       "Principal": "*",
+       "Action": "s3:GetObject",
+       "Resource": "arn:aws:s3:::app.[appdomain].com/*"
+     }]
+   }</code></pre>
 
 1. Click **Save**
 
@@ -56,9 +56,9 @@ I need to create a set of access keys that allow upload access to S3:
 1. Click **Show User Credentials** and copy the Access Key ID and Secret Access Key into a file named `.env.deploy.production` in the root of the ember-cli app:
 
     <pre><code>AWS_KEY=[Access Key ID]
-    AWS_SECRET=[Secret Access Key]
-    AWS_BUCKET=app.[appdomain].com
-    AWS_REGION=us-east-1</code></pre>
+   AWS_SECRET=[Secret Access Key]
+   AWS_BUCKET=app.[appdomain].com
+   AWS_REGION=us-east-1</code></pre>
 
 1. Click **close** (and again to confirm) to return to the list of users
 1. Click on the new user, click the **Permissions** tab, and click **Attach Policy**
@@ -109,16 +109,16 @@ When I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.
 1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the bucket name):
 
     <pre><code>&lt;RoutingRules&gt;
-        &lt;RoutingRule&gt;
-            &lt;Condition&gt;
-                &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
-            &lt;/Condition&gt;
-            &lt;Redirect&gt;
-                &lt;HostName&gt;app.[appdomain].com.s3-website-us-east-1.amazonaws.com&lt;/HostName&gt;
-                &lt;ReplaceKeyPrefixWith&gt;#/&lt;/ReplaceKeyPrefixWith&gt;
-            &lt;/Redirect&gt;
-        &lt;/RoutingRule&gt;
-    &lt;/RoutingRules&gt;</code></pre>
+     &lt;RoutingRule&gt;
+       &lt;Condition&gt;
+         &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
+       &lt;/Condition&gt;
+       &lt;Redirect&gt;
+         &lt;HostName&gt;app.[appdomain].com.s3-website-us-east-1.amazonaws.com&lt;/HostName&gt;
+         &lt;ReplaceKeyPrefixWith&gt;#/&lt;/ReplaceKeyPrefixWith&gt;
+       &lt;/Redirect&gt;
+     &lt;/RoutingRule&gt;
+   &lt;/RoutingRules&gt;</code></pre>
 
 1. Click **Save**
 
@@ -159,16 +159,16 @@ I visit `app.[appdomain].com`, and I see my Ember application delivered via Clou
 1. Edit the  the `<HostName>` value to replace the S3 Endpoint with the custom domain `app.[appdomain].com`:
 
     <pre><code>&lt;RoutingRules&gt;
-        &lt;RoutingRule&gt;
-            &lt;Condition&gt;
-                &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
-            &lt;/Condition&gt;
-            &lt;Redirect&gt;
-                &lt;HostName&gt;app.[appdomain].com&lt;/HostName&gt;
-                &lt;ReplaceKeyPrefixWith&gt;#/&lt;/ReplaceKeyPrefixWith&gt;
-            &lt;/Redirect&gt;
-        &lt;/RoutingRule&gt;
-    &lt;/RoutingRules&gt;</code></pre>
+     &lt;RoutingRule&gt;
+       &lt;Condition&gt;
+         &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
+       &lt;/Condition&gt;
+       &lt;Redirect&gt;
+         &lt;HostName&gt;app.[appdomain].com&lt;/HostName&gt;
+         &lt;ReplaceKeyPrefixWith&gt;#/&lt;/ReplaceKeyPrefixWith&gt;
+       &lt;/Redirect&gt;
+     &lt;/RoutingRule&gt;
+   &lt;/RoutingRules&gt;</code></pre>
 
 1. Click **Save**
 
