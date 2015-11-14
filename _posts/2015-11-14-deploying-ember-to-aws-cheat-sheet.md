@@ -60,7 +60,7 @@ Today I set up my second Ember deployment to AWS. What follows is the consolidat
 
 Make note of the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` endpoint displayed uther the **Static Website Hosting** settings. It will be needed later for CloudFront.
 
-## Upload SSL Certificate
+## SSL Certificate Setup
 
 Obtain an SSL certificate for the domain. From StartSSL (for example), I get a few different files:
 
