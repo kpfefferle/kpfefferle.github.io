@@ -92,6 +92,7 @@ This command requires the full `file://` path to each file. Be sure to change `[
 1. Under **Web**, click **Get Started**
 1. Fill **Origin Domain Name** with the S3 Hosting Endpoint (NOT the name of the bucket) `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`
 1. Set **Viewer Protocol Policy** to **Redirect HTTP to HTTPS**
+1. Set **Forward Query Strings** to **Yes** (if the app uses query params)
 1. In **Alternate Domain Names (CNAMEs)**, enter the `app.[appdomain].com` custom domain that I want to use
 1. Under **SSL Certificate**, choose **Custom SSL Certificate (stored in AWS IAM)**; in the dropdown, select the certificate by the `[appdomain]` name I gave it in the aws-cli upload command
 1. Set **Default Root Object** to `index.html`
