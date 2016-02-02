@@ -20,6 +20,6 @@ someone who has heard of Ember but probably hasn't really tried it out.
 It shows off some simple code and some of my favorite parts of the Ember ecosystem
 in an attempt to get people interested in trying out Ember.
 
-<iframe width="700" height="394" src="https://www.youtube.com/embed/npsaDBiO3n4" frameborder="0" allowfullscreen></iframe>
+<div class="youtube-embed"><iframe src="https://www.youtube.com/embed/npsaDBiO3n4" frameborder="0" allowfullscreen></iframe></div>
 
 <script async class="speakerdeck-embed" data-id="15d79fad801b41ab86fb8df6f763ebb7" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
