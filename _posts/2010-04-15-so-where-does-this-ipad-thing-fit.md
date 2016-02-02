@@ -11,7 +11,7 @@ I’ll admit I was a bit underwhelmed by Steve Jobs’ initial keynote announcem
 
 After this initial reaction to the keynote wore off, I began to really think about the implications of the iPad. It’s not just a big iPod Touch… IT’S A BIG IPOD TOUCH! I started imagining all the possibilities for apps that could take advantage of the increased real estate – the same apps that have transformed the way I interact with the world on the iPhone could do so much more with the extra screen space and raw computing power of the iPad. The more I saw video of the iPad in action, the more I realized it could have a huge impact on how people interact with information via Web. I got myself so excited, I camped outside my local Best Buy for 15 hours before the launch and ended up being first in line at the store.
 
-![First in Line](/assets/images/l_2048_1536_ABE3CE7E-B2F3-437B-9F09-BFEC0F9AE825.jpeg)
+![First in Line](/images/l_2048_1536_ABE3CE7E-B2F3-437B-9F09-BFEC0F9AE825.jpeg)
 
 I have been poking away at my iPad ever since. There have been a million reviews already about the technical specs, user interface, round one apps, and more. I won’t repeat those here. Instead I’ll share my thoughts about the most important iPad question of all:
 
@@ -31,8 +31,8 @@ In conclusion, I believe that the iPad is in fact a game changer. Just as the iP
 
 Hold on to your hats. As more people can access more Web in more places, the opportunity for impact via digital channels is going to explode. What are you (and your business) doing to position yourself for it?
 
-![Weather](/assets/images/p_1024_768_1ED23CB1-E7AC-4697-BEE5-E3CF30A52D13.jpeg)
+![Weather](/images/p_1024_768_1ED23CB1-E7AC-4697-BEE5-E3CF30A52D13.jpeg)
 
-![USA Today](/assets/images/p_1024_768_E383F122-978D-4D90-9864-7E9FF17812B0.jpeg)
+![USA Today](/images/p_1024_768_E383F122-978D-4D90-9864-7E9FF17812B0.jpeg)
 
-![TweetDeck](/assets/images/p_1024_768_9FF5C486-DF41-4B2D-BFAC-9DD14687A7F1.jpeg)
+![TweetDeck](/images/p_1024_768_9FF5C486-DF41-4B2D-BFAC-9DD14687A7F1.jpeg)
