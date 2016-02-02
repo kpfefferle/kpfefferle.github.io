@@ -9,7 +9,8 @@
 title : Kevin Pfefferle
 email: kevin@pfefferle.co
 description: > # this means to ignore newlines until "baseurl:"
-  Double Agent 0012 at Test Double. Maker, thinker, rationalist.
+  Double Agent 0012 at <a href="http://testdouble.com">Test Double</a>.<br>
+  Maker, thinker, rationalist.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://kevin.pfefferle.co" # the base hostname & protocol for your site
 twitter_username: kpfefferle
