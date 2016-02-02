@@ -13,7 +13,7 @@ dynamIt launches plenty of websites – from [Charley’s Grilled Subs](http://w
 
 Web apps are different in that users themselves bring the value to the application, using it to accomplish some goal. What would [Gmail](http://www.gmail.com/) be if you never sent an email and no other email user ever sent one to you? What would [Facebook](http://www.facebook.com/) be without your friends writing status updates, wall posts, event invitations, and bugging you to help them tend to their FarmVille? What would [eBay](http://www.ebay.com/) be without anyone listing items for auction? These user-driven interactions have existed for decades in the form of online forums, instant messaging, and online shopping.
 
-![Website vs. Web App](/assets/images/sitevsapp.png)
+![Website vs. Web App](/images/sitevsapp.png)
 
 Some Web apps are even replacing popular desktop applications; [Google Documents](http://docs.google.com/) performs many of the same functions as the popular Microsoft Office suite of desktop applications. One of the biggest advantages of these “cloud-based” (based on the Internet rather than on the user’s local machine) Web apps is that they can be updated at any time by the application developers – and those changes are immediately reflected for every user of the Web app.
 

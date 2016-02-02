@@ -29,7 +29,7 @@ I picked up my [Apple Magic Mouse](http://www.apple.com/magicmouse/) a couple we
 4. Double-click on the values for "browser.gesture.swipe.left" and "browser.gesture.swipe.right" and change them to "Browser:PrevTab" and "Browser:NextTab" respectively.
 5. Resume browsing as usual and enjoy your new tab-swiping functionality!
 
-![Firefox Settings](/assets/images/Firefox-Magic-Mouse-Screen-Grab.png)
+![Firefox Settings](/images/Firefox-Magic-Mouse-Screen-Grab.png)
 
 MUCH better than the default back/forward swipe functionality!
 

@@ -49,10 +49,10 @@ Or if you want to use the Bit.ly / JSON format just for fun:
 
     http://dynamit.us/url/api.dT?json=true&amp;url=%@
 
-![Tweetie URL Settings](/assets/images/tweetie-url-1.jpg) ![Tweetie URL API](/assets/images/tweetie-url-2.jpg)
+![Tweetie URL Settings](/images/tweetie-url-1.jpg) ![Tweetie URL API](/images/tweetie-url-2.jpg)
 
 Tweetie recognizes "%@" as where it should include the URL in the <abbr title="Application Programming Interface">API</abbr> call. Now whenever I am tweeting from my phone and want to include a URL, Tweetie will automatically use the dynamit.us URL shortener to shorten the link for me!
 
-![Test Tweet](/assets/images/tweetie-url-3.jpg)
+![Test Tweet](/images/tweetie-url-3.jpg)
 
 Are there other places where you might like to use our URL shortener?

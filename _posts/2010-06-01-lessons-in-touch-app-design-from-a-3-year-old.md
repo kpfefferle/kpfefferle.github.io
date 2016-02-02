@@ -13,7 +13,7 @@ A new generation of touch-enabled devices (iPhones, iPod Touches, iPads, etc.) i
 
 While there is a lot of carryover in how people approach these devices (e.g. “tap” on a touchscreen is roughly equivalent to “click” on a mouse), there are many differences as well—I would never consider rotating my laptop 90 degrees as a means of interacting with it, but on an iPhone or iPad it may enlarge what I am viewing, stretch the layout to accomodate the width of the viewport, completely relayout the design, or even act as a means for navigation or control. These changes can make for a shaky transition for many traditional computer users, and even lead to [reasonable questions about the usability of the devices themselves](http://www.wired.com/gadgetlab/2010/05/ipad-usability/).
 
-![Leah Using Her iPhone](/assets/images/photo-300x225.jpg)
+![Leah Using Her iPhone](/images/photo-300x225.jpg)
 
 In spite of these challenges, I have been fascinated by one particular case study: my 3-year old daughter, Leah. Ever since a particularly long car trip where we required a means for keeping her entertained, Leah has possessed my old iPhone 3G (sans cell service) loaded with games designed for preschoolers as well as the impossible-to-remove default Apple applications such as maps, weather, and camera.
 
