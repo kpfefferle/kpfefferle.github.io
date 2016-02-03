@@ -6,20 +6,13 @@
 }
 
 .container {
-	padding-top: 7.5rem;
-	padding-bottom: 7.5rem;
+	padding-top: 2.5rem;
+	padding-bottom: 2.5rem;
 	margin-bottom: 0;
 	max-width: 80.0rem;
 }
 
 .navigation {
-	position: fixed;
-	z-index: 99;
-	left: 0;
-	right: 0;
-	top: 0;
-	max-width: 100%;
-	max-width: 100vw;
 	background: #f4f5f6;
 	border-bottom: .1rem solid #d1d1d1;
 	display: block;
@@ -34,7 +27,7 @@
 .navigation-title {
 	display: inline;
 	line-height: 5.2rem;
-	font-size: 1.6rem;
+	font-size: 2.2rem;
 	padding: 0;
 	text-decoration: none;
 }
