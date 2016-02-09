@@ -103,9 +103,12 @@ To use the application from S3, I need to enable static site hosting on my S3 bu
 
 ### Set S3 Routing Rules
 
-When I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I see my Ember application running in the browser. However, when I reload the page on any route but the root, I get a 404 error. I need to configure routing rules so that S3 knows to route all route paths to `index.html`:
+**UPDATE (2/9/2016):** Don't use S3 to route non-root paths. Use a [CloudFront custom error response](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
 
-1. Under the **Static Website Hosting** settings, click **Edit Redirection Rules**
+<s>
+When I click the <b>Endpoint</b> link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I see my Ember application running in the browser. However, when I reload the page on any route but the root, I get a 404 error. I need to configure routing rules so that S3 knows to route all route paths to `index.html`:
+
+1. Under the <b>Static Website Hosting</b> settings, click <b>Edit Redirection Rules</b>
 1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the bucket name):
 
     <pre><code>&lt;RoutingRules&gt;
@@ -120,9 +123,10 @@ When I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.
      &lt;/RoutingRule&gt;
    &lt;/RoutingRules&gt;</code></pre>
 
-1. Click **Save**
+1. Click <b>Save</b>
 
-When I click the **Endpoint** link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I can reload any route and my Ember application will render the proper state without the 404.
+When I click the <b>Endpoint</b> link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I can reload any route and my Ember application will render the proper state without the 404.
+</s>
 
 ## Step 2: Distribute S3 Assets via CloudFront
 
@@ -134,7 +138,21 @@ At this point, I could change my DNS settings to point `app.[appdomain].com` at 
 1. Leave most of the settings in this form set to their defaults, but set **Default Root Object** to `index.html`; this will load my application when I visit the CloudFront root path
 1. Click **Create Distribution**
 
-It takes up to 15 minutes to create the CloudFront distribution. Once the **Status** column in the CloudFront list switches from "In Progress" to "Deployed", the distribution is complete. I visit the CloudFront domain name at `[cloudfrontcode].cloudfront.net`, and my Ember application works here just as it did at the S3 Endpoint. When I refresh a route other than the root, it still redirects to the S3 Endpoint, but I will update the redirect rules after my custom domain is set up.
+### Add CloudFront custom error response
+
+**UPDATE (2/9/16):** This will handle requests for other routes within the Ember application [without using a hash-based redirect](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
+
+1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/)
+1. Click on the **[Distribution ID]**
+1. Click the **Error Pages** tab
+1. Click **Create Custom Error Response**
+1. Set **HTTP Error Code** to **404: Not Found**
+1. Under **Customize Error Response**, click **Yes**
+1. Set **Response Page Path** to `/index.html`
+1. Set **HTTP Response Code** to **200: OK**
+1. Click **Create**
+
+It takes up to 15 minutes to create the CloudFront distribution. Once the **Status** column in the CloudFront list switches from "In Progress" to "Deployed", the distribution is complete. I visit the CloudFront domain name at `[cloudfrontcode].cloudfront.net`, and my Ember application works here just as it did at the S3 Endpoint. <s>When I refresh a route other than the root, it still redirects to the S3 Endpoint, but I will update the redirect rules after my custom domain is set up.</s> **UPDATE (2/9/2016):** The CloudFront custom error response will now handle any non-root routes.
 
 ## Step 3: Use Custom Domain for CloudFront
 
@@ -151,11 +169,16 @@ It takes some time for this change to take effect. Once again, I watch for the *
 1. Open the domain's DNS settings (mine are managed on [DNSimple](https://dnsimple.com))
 1. Create a `CNAME` record that sets `app.[appdomain].com` as an alias for the CloudFront distribution at `[cloudfrontcode].cloudfront.net`
 
-I visit `app.[appdomain].com`, and I see my Ember application delivered via CloudFront. However, I still get redirected to the S3 Endpoint when I reload any non-root URL. To fix this, I update the S3 Redirection Rules:
+I visit `app.[appdomain].com`, and I see my Ember application delivered via CloudFront.
+
+**UPDATE (2/9/2016):** Don't use S3 to route non-root paths. Use a [CloudFront custom error response](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
+
+<s>
+However, I still get redirected to the S3 Endpoint when I reload any non-root URL. To fix this, I update the S3 Redirection Rules:
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/)
-1. Select the `app.[appdomain].com` bucket, click **Properties**, then click **Static Website Hosting**
-1. Under the **Static Website Hosting** settings, open **Edit Redirection Rules** (if it's not already open)
+1. Select the `app.[appdomain].com` bucket, click <b>Properties</b>, then click <b>Static Website Hosting</b>
+1. Under the <b>Static Website Hosting</b> settings, open <b>Edit Redirection Rules</b> (if it's not already open)
 1. Edit the  the `<HostName>` value to replace the S3 Endpoint with the custom domain `app.[appdomain].com`:
 
     <pre><code>&lt;RoutingRules&gt;
@@ -170,16 +193,17 @@ I visit `app.[appdomain].com`, and I see my Ember application delivered via Clou
      &lt;/RoutingRule&gt;
    &lt;/RoutingRules&gt;</code></pre>
 
-1. Click **Save**
+1. Click <b>Save</b>
 
-Now reloading non-root URLs redirects properly to my custom domain. CloudFront is **very** aggressive with caching, so since I tested the non-root redirects through the CloudFront before changing the redirect rules, I also need to invalidate the CloudFront cache *(these steps can be skipped if the non-root URLs have not been loaded using the CloudFront URL)*:
+Now reloading non-root URLs redirects properly to my custom domain. CloudFront is <b>very</b> aggressive with caching, so since I tested the non-root redirects through the CloudFront before changing the redirect rules, I also need to invalidate the CloudFront cache <em>(these steps can be skipped if the non-root URLs have not been loaded using the CloudFront URL)</em>:
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/)
-1. Select the CloudFront distribution I just created, then click **Distribution Settings**
-1. Click the **Invalidations** tab, then click **Create Invalidation**
-1. Set **Object Paths** to `*` (all objects) and click **Invalidate**
+1. Select the CloudFront distribution I just created, then click <b>Distribution Settings</b>
+1. Click the <b>Invalidations</b> tab, then click <b>Create Invalidation</b>
+1. Set <b>Object Paths</b> to `*` (all objects) and click <b>Invalidate</b>
 
-As with any CloudFront change, it takes a bit of time for the invalidation to occur across all of the CloudFront edge locations. I monitor this again by watching the invalidation's **Status** column.
+As with any CloudFront change, it takes a bit of time for the invalidation to occur across all of the CloudFront edge locations. I monitor this again by watching the invalidation's <b>Status</b> column.
+</s>
 
 ## Step 4: Add SSL to CloudFront
 

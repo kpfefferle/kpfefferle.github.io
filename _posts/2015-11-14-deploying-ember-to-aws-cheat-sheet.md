@@ -41,21 +41,6 @@ Today I set up my second Ember deployment to AWS. What follows is the consolidat
 1. Within the bucket **Properties**, click **Static Website Hosting**
 1. Click **Enable Website Hosting**
 1. Set **Index Document** to `index.html`
-1. Under the **Static Website Hosting** settings, click **Edit Redirection Rules**
-1. Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the proper domain name):
-
-    <pre><code>&lt;RoutingRules&gt;
-     &lt;RoutingRule&gt;
-       &lt;Condition&gt;
-         &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
-       &lt;/Condition&gt;
-       &lt;Redirect&gt;
-         &lt;HostName&gt;app.[appdomain].com&lt;/HostName&gt;
-         &lt;ReplaceKeyPrefixWith&gt;#/&lt;/ReplaceKeyPrefixWith&gt;
-       &lt;/Redirect&gt;
-     &lt;/RoutingRule&gt;
-   &lt;/RoutingRules&gt;</code></pre>
-
 1. Click **Save**
 
 Make note of the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` endpoint displayed uther the **Static Website Hosting** settings. It will be needed later for CloudFront.
@@ -97,6 +82,20 @@ This command requires the full `file://` path to each file. Be sure to change `[
 1. Under **SSL Certificate**, choose **Custom SSL Certificate (stored in AWS IAM)**; in the dropdown, select the certificate by the `[appdomain]` name I gave it in the aws-cli upload command
 1. Set **Default Root Object** to `index.html`
 1. Click **Create Distribution**
+
+### Add CloudFront custom error response
+
+This will handle requests for other routes within the Ember application [without using a hash-based redirect](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
+
+1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/)
+1. Click on the **[Distribution ID]**
+1. Click the **Error Pages** tab
+1. Click **Create Custom Error Response**
+1. Set **HTTP Error Code** to **404: Not Found**
+1. Under **Customize Error Response**, click **Yes**
+1. Set **Response Page Path** to `/index.html`
+1. Set **HTTP Response Code** to **200: OK**
+1. Click **Create**
 
 ### Domain DNS
 
