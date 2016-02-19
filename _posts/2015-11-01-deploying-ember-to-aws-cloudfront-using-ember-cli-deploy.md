@@ -198,4 +198,4 @@ Fingerprinted assets like the app's CSS and JavaScript have unique names, so I d
 
 **UPDATE (2/9/2016):** Updated this post to use CloudFront custom error pages instead of S3 routing rules to handle loading non-root URLs [without a hash-based redirect](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash)
 
-**UPDATE (2/19/2016):** Updated this post to use AWS Certificate Manager to obtain an SSL certificate for CloudFront
+**UPDATE (2/19/2016):** Updated this post to use [AWS Certificate Manager](https://aws.amazon.com/blogs/aws/new-aws-certificate-manager-deploy-ssltls-based-apps-on-aws/) to obtain an SSL certificate for CloudFront
