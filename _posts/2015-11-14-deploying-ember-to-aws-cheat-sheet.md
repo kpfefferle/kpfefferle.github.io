@@ -45,29 +45,15 @@ Today I set up my second Ember deployment to AWS. What follows is the consolidat
 
 Make note of the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` endpoint displayed uther the **Static Website Hosting** settings. It will be needed later for CloudFront.
 
-## SSL Certificate Setup
+## Create SSL Certificate
 
-Obtain an SSL certificate for the domain. From StartSSL (for example), I get a few different files:
-
-- `ssl.crt` contains my certificate
-- `ssl.key` contains my private key
-- `sub.class1.server.ca.pem` contains StartSSL's intermediate certificates
-- `ca.pem` contains StartSSL's root certificate
-
-Amazon requires a single file for the CA's certificates, so I run the following command to combine `sub.class1.server.ca.pem` and `ca.pem` into one file that contains both:
-
-    $ cat sub.class1.server.ca.pem ca.pem > ca-bundle.pem
-
-Uploading the certificate files requires the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html). If it's not already installed, it can be installed via Homebrew:
-
-    $ brew install awscli
-    $ aws configure
-
-I use the following command to upload my SSL certificate to AWS:
-
-    $ aws iam upload-server-certificate --server-certificate-name [appdomain] --certificate-body file:///path/to/certificates/ssl.crt --private-key file:///path/to/certificates/ssl.key --certificate-chain file:///path/to/certificates/ca-bundle.pem --path /cloudfront/[appdomain]/
-
-This command requires the full `file://` path to each file. Be sure to change `[appdomain]` in both cases to something recognizable for the project.
+1. Open the [AWS Certificate Manager Console](https://console.aws.amazon.com/acm/)
+1. Click **Get started** if no certificates exist or **Request a certificate** if there are existing certificates
+1. Under **Domain name**, enter the application subdomain `app.[appdomain].com` that will be used
+1. Click **Review and request**
+1. Review the domain name, then click **Confirm and request**
+1. Check the email address associated with the domain registration for a certificate approval email; in the email, click the link to **Amazon Certificate Approvals**
+1. On the approval page, click **I Approve**
 
 ## CloudFront Setup
 
@@ -79,7 +65,7 @@ This command requires the full `file://` path to each file. Be sure to change `[
 1. Set **Viewer Protocol Policy** to **Redirect HTTP to HTTPS**
 1. Set **Forward Query Strings** to **Yes** (if the app uses query params)
 1. In **Alternate Domain Names (CNAMEs)**, enter the `app.[appdomain].com` custom domain that I want to use
-1. Under **SSL Certificate**, choose **Custom SSL Certificate (stored in AWS IAM)**; in the dropdown, select the certificate by the `[appdomain]` name I gave it in the aws-cli upload command
+1. Under **SSL Certificate**, choose **Custom SSL Certificate (example.com)**; in the dropdown, select the ACM certificate for `app.[appdomain].com`
 1. Set **Default Root Object** to `index.html`
 1. Click **Create Distribution**
 
