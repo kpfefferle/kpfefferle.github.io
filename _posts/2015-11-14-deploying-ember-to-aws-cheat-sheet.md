@@ -65,7 +65,8 @@ Make note of the `app.[appdomain].com.s3-website-us-east-1.amazonaws.com` endpoi
 1. Set **Viewer Protocol Policy** to **Redirect HTTP to HTTPS**
 1. Set **Forward Query Strings** to **Yes** (if the app uses query params)
 1. In **Alternate Domain Names (CNAMEs)**, enter the `app.[appdomain].com` custom domain that I want to use
-1. Under **SSL Certificate**, choose **Custom SSL Certificate (example.com)**; in the dropdown, select the ACM certificate for `app.[appdomain].com`
+1. Under **SSL Certificate**, choose **Custom SSL Certificate (example.com)**
+1. In the dropdown, select the ACM certificate for `app.[appdomain].com`
 1. Set **Default Root Object** to `index.html`
 1. Click **Create Distribution**
 

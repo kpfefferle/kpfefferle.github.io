@@ -144,37 +144,23 @@ I visit `app.[appdomain].com`, and I see my Ember application delivered via Clou
 
 ## Step 4: Add SSL to CloudFront
 
-I finally am reaching my ultimate goal: serving my Ember application over SSL. First, I obtain an SSL certificate from a Certificate Authority. I typically purchase production SSL certificates from [DNSimple](https://dnsimple.com) to manage them alongside my domain registrations and DNS records, but for this side project I'm using a free SSL certificate from [StartSSL](https://www.startssl.com).
+I finally am reaching my ultimate goal: serving my Ember application over SSL. First, I obtain an SSL certificate through AWS Certificate Manager:
 
-From StartSSL, I get a few different files:
+1. Open the [AWS Certificate Manager Console](https://console.aws.amazon.com/acm/)
+1. Click **Get started** if no certificates exist or **Request a certificate** if there are existing certificates
+1. Under **Domain name**, enter the application subdomain `app.[appdomain].com` that will be used
+1. Click **Review and request**
+1. Review the domain name, then click **Confirm and request**
+1. Check the email address associated with the domain registration for a certificate approval email; in the email, click the link to **Amazon Certificate Approvals**
+1. On the approval page, click **I Approve**
 
-- `ssl.crt` contains my certificate
-- `ssl.key` contains my private key
-- `sub.class1.server.ca.pem` contains StartSSL's intermediate certificates
-- `ca.pem` contains StartSSL's root certificate
-
-Amazon requires a single file for the CA's certificates, so I run the following command to combine `sub.class1.server.ca.pem` and `ca.pem` into one file that contains both:
-
-    $ cat sub.class1.server.ca.pem ca.pem > ca-bundle.pem
-
-Uploading the certificate files requires the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html). If it's not already installed, it can be installed via Homebrew:
-
-    $ brew install awscli
-    $ aws configure
-
-I use the following command to upload my SSL certificate to AWS:
-
-    $ aws iam upload-server-certificate --server-certificate-name [appdomain] --certificate-body file:///path/to/certificates/ssl.crt --private-key file:///path/to/certificates/ssl.key --certificate-chain file:///path/to/certificates/ca-bundle.pem --path /cloudfront/[appdomain]/
-
-This command requires the full `file://` path to each file. Be sure to change `[appdomain]` in both cases to something recognizable for the project.
-
-I tell CloudFront to use the uploaded SSL certificate for my custom CloudFront domain:
+I tell CloudFront to use the new SSL certificate for my custom CloudFront domain:
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/)
 1. Select the CloudFront distribution, then click **Distribution Settings**
 1. On the **General** tab, click **Edit**
-1. Under **SSL Certificate**, choose **Custom SSL Certificate (stored in AWS IAM)**
-1. In the dropdown, I select the certificate by the `[appdomain]` name I gave it in the aws-cli upload command
+1. Under **SSL Certificate**, choose **Custom SSL Certificate (example.com)**
+1. In the dropdown, I select the ACM certificate for `app.[appdomain].com`
 1. Under **Custom SSL Client Support**, make sure that **Only Clients that Support Server Name Indication (SNI)** is selected; this option supports all modern browsers and does not add to the cost of using CloudFront
 1. Click **Yes, Edit** to save this change
 
@@ -208,6 +194,8 @@ Fingerprinted assets like the app's CSS and JavaScript have unique names, so I d
 - I really don't like having to run that ugly CLI command at the end to invalidate my `index.html`, so I'm working on an [ember-cli-deploy plugin](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugins/) to automate this step
 - Once I've got the CloudFront invalidation step automated, I plan on creating an [ember-cli-deploy plugin pack](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugin-packs/) that contains all of the plugins needed for this deployment strategy
 
-**UPDATE (11/10/2015):** These two enhancements are [now available](/2015/11/10/introducing-ember-cli-deploy-cloudfront-and-ember-cli-deploy-aws-pack/)!
+**UPDATE (11/10/2015):** These two enhancements are [now available](/2015/11/10/introducing-ember-cli-deploy-cloudfront-and-ember-cli-deploy-aws-pack/)
 
-**UPDATE (2/9/16):** Updated this post to use CloudFront custom error pages instead of S3 routing rules to handle loading non-root URLs [without a hash-based redirect](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
+**UPDATE (2/9/2016):** Updated this post to use CloudFront custom error pages instead of S3 routing rules to handle loading non-root URLs [without a hash-based redirect](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash)
+
+**UPDATE (2/19/2016):** Updated this post to use AWS Certificate Manager to obtain an SSL certificate for CloudFront
