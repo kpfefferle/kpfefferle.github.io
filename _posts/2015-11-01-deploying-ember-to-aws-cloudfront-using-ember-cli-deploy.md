@@ -123,7 +123,7 @@ At this point, I could change my DNS settings to point `app.[appdomain].com` at 
 1. Set **HTTP Response Code** to **200: OK**
 1. Click **Create**
 
-It takes up to 15 minutes to create the CloudFront distribution. Once the **Status** column in the CloudFront list switches from "In Progress" to "Deployed", the distribution is complete. I visit the CloudFront domain name at `[cloudfrontcode].cloudfront.net`, and my Ember application works here just as it did at the S3 Endpoint. <s>When I refresh a route other than the root, it still redirects to the S3 Endpoint, but I will update the redirect rules after my custom domain is set up.</s> **UPDATE (2/9/2016):** The CloudFront custom error response will now handle any non-root routes.
+It takes up to 15 minutes to create the CloudFront distribution. Once the **Status** column in the CloudFront list switches from "In Progress" to "Deployed", the distribution is complete. I visit the CloudFront domain name at `[cloudfrontcode].cloudfront.net`, and my Ember application works here just as it did at the S3 Endpoint.
 
 ## Step 3: Use Custom Domain for CloudFront
 
