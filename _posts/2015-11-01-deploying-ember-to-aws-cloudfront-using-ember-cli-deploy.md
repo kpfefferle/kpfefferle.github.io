@@ -101,41 +101,6 @@ To use the application from S3, I need to enable static site hosting on my S3 bu
 1. Set **Index Document** to `index.html`
 1. Click **Save**
 
-### Set S3 Routing Rules
-
-**UPDATE (2/9/2016):** Don't use S3 to route non-root paths. Use a [CloudFront custom error response](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
-
-<s>
-<p>When I click the <b>Endpoint</b> link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I see my Ember application running in the browser. However, when I reload the page on any route but the root, I get a 404 error. I need to configure routing rules so that S3 knows to route all route paths to `index.html`:</p>
-
-<ol>
-<li>
-Under the <b>Static Website Hosting</b> settings, click <b>Edit Redirection Rules</b>
-</li>
-<li>
-Copy/paste the following rules into the textarea (replacing `app.[appdomain].com` with the bucket name):
-
-    <pre><code>&lt;RoutingRules&gt;
-     &lt;RoutingRule&gt;
-       &lt;Condition&gt;
-         &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
-       &lt;/Condition&gt;
-       &lt;Redirect&gt;
-         &lt;HostName&gt;app.[appdomain].com.s3-website-us-east-1.amazonaws.com&lt;/HostName&gt;
-         &lt;ReplaceKeyPrefixWith&gt;#/&lt;/ReplaceKeyPrefixWith&gt;
-       &lt;/Redirect&gt;
-     &lt;/RoutingRule&gt;
-   &lt;/RoutingRules&gt;</code></pre>
-
-</li>
-<li>
-Click <b>Save</b>
-</li>
-</ol>
-
-<p>When I click the <b>Endpoint</b> link to `app.[appdomain].com.s3-website-us-east-1.amazonaws.com`, I can reload any route and my Ember application will render the proper state without the 404.</p>
-</s>
-
 ## Step 2: Distribute S3 Assets via CloudFront
 
 At this point, I could change my DNS settings to point `app.[appdomain].com` at the S3 bucket since it's set up for static site hosting (and the bucket name matches the subdomain). However, there are two reasons that I want to distribute my Ember application through CloudFront instead. First, S3 does not support SSL for custom domains. Second, CloudFront gives my application assets the speed boost that comes with being distributed to and delivered from CloudFront's edge locations around the world.
@@ -147,8 +112,6 @@ At this point, I could change my DNS settings to point `app.[appdomain].com` at 
 1. Click **Create Distribution**
 
 ### Add CloudFront custom error response
-
-**UPDATE (2/9/16):** This will handle requests for other routes within the Ember application [without using a hash-based redirect](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
 
 1. Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/)
 1. Click on the **[Distribution ID]**
@@ -178,61 +141,6 @@ It takes some time for this change to take effect. Once again, I watch for the *
 1. Create a `CNAME` record that sets `app.[appdomain].com` as an alias for the CloudFront distribution at `[cloudfrontcode].cloudfront.net`
 
 I visit `app.[appdomain].com`, and I see my Ember application delivered via CloudFront.
-
-**UPDATE (2/9/2016):** Don't use S3 to route non-root paths. Use a [CloudFront custom error response](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
-
-<s>
-<p>However, I still get redirected to the S3 Endpoint when I reload any non-root URL. To fix this, I update the S3 Redirection Rules:</p>
-
-<ol>
-<li>
-Open the [AWS S3 Console](https://console.aws.amazon.com/s3/)
-</li>
-<li>
-Select the `app.[appdomain].com` bucket, click <b>Properties</b>, then click <b>Static Website Hosting</b>
-</li>
-<li>
-Under the <b>Static Website Hosting</b> settings, open <b>Edit Redirection Rules</b> (if it's not already open)
-</li>
-<li>
-Edit the `HostName` value to replace the S3 Endpoint with the custom domain `app.[appdomain].com`:
-
-    <pre><code>&lt;RoutingRules&gt;
-     &lt;RoutingRule&gt;
-       &lt;Condition&gt;
-         &lt;HttpErrorCodeReturnedEquals&gt;404&lt;/HttpErrorCodeReturnedEquals&gt;
-       &lt;/Condition&gt;
-       &lt;Redirect&gt;
-         &lt;HostName&gt;app.[appdomain].com&lt;/HostName&gt;
-         &lt;ReplaceKeyPrefixWith&gt;#/&lt;/ReplaceKeyPrefixWith&gt;
-       &lt;/Redirect&gt;
-     &lt;/RoutingRule&gt;
-   &lt;/RoutingRules&gt;</code></pre>
-</li>
-<li>
-Click <b>Save</b>
-</li>
-</ol>
-
-<p>Now reloading non-root URLs redirects properly to my custom domain. CloudFront is <b>very</b> aggressive with caching, so since I tested the non-root redirects through the CloudFront before changing the redirect rules, I also need to invalidate the CloudFront cache <em>(these steps can be skipped if the non-root URLs have not been loaded using the CloudFront URL)</em>:</p>
-
-<ol>
-<li>
-Open the [AWS CloudFront Console](https://console.aws.amazon.com/cloudfront/)
-</li>
-<li>
-Select the CloudFront distribution I just created, then click <b>Distribution Settings</b>
-</li>
-<li>
-Click the <b>Invalidations</b> tab, then click <b>Create Invalidation</b>
-</li>
-<li>
-Set <b>Object Paths</b> to `*` (all objects) and click <b>Invalidate</b>
-</li>
-</ol>
-
-<p>As with any CloudFront change, it takes a bit of time for the invalidation to occur across all of the CloudFront edge locations. I monitor this again by watching the invalidation's <b>Status</b> column.</p>
-</s>
 
 ## Step 4: Add SSL to CloudFront
 
@@ -300,4 +208,6 @@ Fingerprinted assets like the app's CSS and JavaScript have unique names, so I d
 - I really don't like having to run that ugly CLI command at the end to invalidate my `index.html`, so I'm working on an [ember-cli-deploy plugin](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugins/) to automate this step
 - Once I've got the CloudFront invalidation step automated, I plan on creating an [ember-cli-deploy plugin pack](http://ember-cli.github.io/ember-cli-deploy/docs/v0.5.x/plugin-packs/) that contains all of the plugins needed for this deployment strategy
 
-**UPDATE:** These two enhancements are [now available](/2015/11/10/introducing-ember-cli-deploy-cloudfront-and-ember-cli-deploy-aws-pack/)!
+**UPDATE (11/10/2015):** These two enhancements are [now available](/2015/11/10/introducing-ember-cli-deploy-cloudfront-and-ember-cli-deploy-aws-pack/)!
+
+**UPDATE (2/9/16):** Updated this post to use CloudFront custom error pages instead of S3 routing rules to handle loading non-root URLs [without a hash-based redirect](https://hashrocket.com/blog/posts/ember-on-s3-with-cloudfront-bash-the-hash).
