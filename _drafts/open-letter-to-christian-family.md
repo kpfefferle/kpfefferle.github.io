@@ -24,9 +24,9 @@ I now understand that Christianity is not under attack, but when you're used to 
 I now understand that a handful of human cells is no more biologically a human than a few bricks are architecturally a house.
 I now understand that regardless of the gender of the participants, marriage empowers two people to enter into a loving commitment to one another backed by the authority of the State.
 
-Most of all, I now understand that no matter where we stand on these issues, the single greatest thing about our country is the declared right for *all* to strive toward the pursuit of their own happiness.
+Most of all, I now understand that no matter where we stand on these issues, the single greatest thing about our country is the declared right of *every single person* to strive toward the pursuit of their own happiness.
 
-I assume that the vote you cast on Tuesday seemed to promise benefit for you and your own interests.
+I assume that the vote you cast on Tuesday seemed to promise some benefit for you and your own interests.
 However, your vote has unleashed [a wave of hate](https://mobile.twitter.com/i/moments/796417517157830656?m=1)  against those less privileged than you.
 Such outcomes are certainly not great, and we haven't even sworn in our new President yet.
 When you cast this vote, I can only surmise that you were not considering those who might be excluded by your candidate's vision of what he thinks will "make America great again".
@@ -53,7 +53,7 @@ With hope for our country and a love founded on our shared humanity,
 
 Kevin
 
--------------
+---
 
 PS: This week, I have become a supporting member of the following organizations.
 They are fighting for me and those like me in the absence of a national leader that will.
