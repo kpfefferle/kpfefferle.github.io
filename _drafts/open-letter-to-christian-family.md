@@ -32,7 +32,7 @@ Such outcomes are certainly not great, and we haven't even sworn in our new Pres
 When you cast this vote, I can only surmise that you were not considering those who might be excluded by your candidate's vision of what he thinks will "make America great again".
 Maybe no one close to you had made known to you how threatened they are by his proposed version of America.
 Maybe it seems that everyone you care about is a white Christian just like you.
-So please let me speak up now:
+If so, please let me speak up now:
 
 **I am an atheist.**
 
