@@ -49,7 +49,7 @@ I'd love to have these discussions in person where we can really take the time t
 As much as I love digital communication, it too often disconnects us from the humanity sitting on the other end of the keyboard.
 Only by taking the time to consider the perspectives of some Americans most unlike ourselves might we be "one nation, indivisible, with liberty and justice for all".
 
-With hope for our country and a love founded on our shared humanity,
+With hope for our country's future and a love founded on our shared humanity,
 
 Kevin
 
