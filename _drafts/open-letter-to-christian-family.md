@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "An Open Letter to my Christian Family"
+title: "Open Letter to my Christian Family"
 description: "Let's speak honestly about the ideals that divide us"
 category: Personal
 tags: [politics, religion, atheism]
