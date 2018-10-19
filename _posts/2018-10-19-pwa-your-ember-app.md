@@ -66,7 +66,7 @@ ember install ember-cli-fastboot
 ember install prember
 ```
 
-To configure which URLs Prember should pre-render, define these URLs inside the projects `ember-cli-build.js`:
+To configure which URLs Prember should pre-render, define these URLs inside the project's `ember-cli-build.js`:
 
 ```js
 // ember-cli-build.js
