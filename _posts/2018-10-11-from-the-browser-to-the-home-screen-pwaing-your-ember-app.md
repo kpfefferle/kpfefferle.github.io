@@ -10,4 +10,6 @@ For EmberConf, we built a cutting-edge Ember mobile web app to serve as a conven
 
 I shared this talk at [EmberFest](https://emberfest.eu/) in Amsterdam on October 11, 2018.
 
+<div class="youtube-embed"><iframe src="https://www.youtube.com/embed/jJhhMG91vL0" frameborder="0" allowfullscreen></iframe></div>
+
 <script async class="speakerdeck-embed" data-id="3c94321fdbc442c998344edc3aa03bf5" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
